@@ -41,4 +41,9 @@ class HomeController extends Controller
     public function login(){
         return view('login');
     }
+
+    public function viewdetails(){
+        return view('viewdetails');
+    }
+
 }

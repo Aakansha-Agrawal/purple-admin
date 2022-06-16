@@ -31,9 +31,7 @@
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         @yield('content')
-
     </div>
     <!-- End Page Wrapper -->
 

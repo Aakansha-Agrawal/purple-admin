@@ -14,42 +14,53 @@
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Bookings</h1>
+                <h1 class="h3 mb-0 text-gray-800">Active Bookings</h1>
             </div>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5"> All Bookings</th>
-                        <th class="bl5">Active Bookings</th>
-                        <th class="bl5">Closed Bookings</th>
-
+                        <th class="bl5"> Order Number</th>
+                        <th class="bl5">Renter Name</th>
+                        <th class="bl5">Equipment Name</th>
+                        <th class="bl5">Service Provider Name</th>
+                        <th class="bl5">View Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-label="All Bookings">30</td>
-                        <td data-label="Active Bookings">15</td>
-                        <td data-label="Closed Bookings">15</td>
+                        <td data-label="Order Number">30</td>
+                        <td data-label="Renter Name">Amit</td>
+                        <td data-label="Equipment Name"></td>
+                        <td data-label="Service Provider Name">Abhishek</td>
+                        <td data-label="View Details"><a href="viewdetails.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View Details</button></a></td>
                     </tr>
                     <tr>
-                        <td data-label="All Bookings">30</td>
-                        <td data-label="Active Bookings">15</td>
-                        <td data-label="Closed Bookings">15</td>
+                        <td data-label="Order Number">30</td>
+                        <td data-label="Renter Name">Amit</td>
+                        <td data-label="Equipment Name"></td>
+                        <td data-label="Service Provider Name">Abhishek</td>
+                        <td data-label="View Details"><a href="viewdetails.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View Details</button></a></td>
                     </tr>
                     <tr>
-                        <td data-label="All Bookings">30</td>
-                        <td data-label="Active Bookings">15</td>
-                        <td data-label="Closed Bookings">15</td>
+                        <td data-label="Order Number">30</td>
+                        <td data-label="Renter Name">Amit</td>
+                        <td data-label="Equipment Name"></td>
+                        <td data-label="Service Provider Name">Abhishek</td>
+                        <td data-label="View Details"><a href="viewdetails.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View Details</button></a></td>
                     </tr>
                     <tr>
-                        <td data-label="All Bookings">30</td>
-                        <td data-label="Active Bookings">15</td>
-                        <td data-label="Closed Bookings">15</td>
+                        <td data-label="Order Number">30</td>
+                        <td data-label="Renter Name">Amit</td>
+                        <td data-label="Equipment Name"></td>
+                        <td data-label="Service Provider Name">Abhishek</td>
+                        <td data-label="View Details"><a href="viewdetails.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View Details</button></a></td>
                     </tr>
                     <tr>
-                        <td data-label="All Bookings">30</td>
-                        <td data-label="Active Bookings">15</td>
-                        <td data-label="Closed Bookings">15</td>
+                        <td data-label="Order Number">30</td>
+                        <td data-label="Renter Name">Amit</td>
+                        <td data-label="Equipment Name"></td>
+                        <td data-label="Service Provider Name">Abhishek</td>
+                        <td data-label="View Details"><a href="viewdetails.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View Details</button></a></td>
                     </tr>
                 </tbody>
             </table>
