@@ -10,11 +10,12 @@
 
         @include('layouts.navbar')
 
-        <!------------- Begin Services Page Content ------------>
+        <!------------- Begin Renter Page Content ------------>
         <div class="container-fluid">
+
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Deleted Service Providers</h1>
+                <h1 class="h3 mb-0 text-gray-800">Renter</h1>
             </div>
             <div class="app">
                 @include('flash-message')
@@ -26,36 +27,34 @@
                         <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>
-                        <th class="bl5"> Profile Picture</th>
+                        <th class="bl5">Profile Picture</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($services->count() > 0)
+                    @if($renters->count() > 0)
                     @php $i=1; @endphp
-                    @foreach($services as $service)
+                    @foreach($renters as $renter)
                     <tr>
                         <td data-label="SNo">{{ $i }}</td>
-                        <td data-label="Full Name">{{ $service->full_name }}</td>
-                        <td data-label="Email">{{ $service->email }}</td>
-                        <td data-label="Phone">{{ $service->phone }}</td>
-                        <td data-label="Profile Picture"><img src="/{{ $service->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>
-                        <td data-label="Block" class="d-flex justify-content-center">
-                            <a href="/services/{{ $service->id }}/restore" onclick="return confirm('Do you want to Restore the user?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
-                            <a href="/services/{{ $service->id }}/delete" onclick="return confirm('Do you want to Delete the user?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>
-                        </td>
+                        <td data-label="Full Name">{{ $renter->full_name }}</td>
+                        <td data-label="Email">{{ $renter->email }}</td>
+                        <td data-label="Phone">{{ $renter->phone }}</td>
+                        <td data-label="Profile Picture"><img src="/{{ $renter->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>
+                        <td data-label="Block"><a href="/renter/{{ $renter->id }}/delete" onclick="return confirm('Do you want to Delete the renter?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="6"> No Services Found!</td>
+                        <td colspan="5"> No Renters Found!</td>
                     </tr>
                     @endif
                 </tbody>
             </table>
         </div>
-        <!-------------- End Services Page Content --------------->
+        <!-------------- End Renter Page Content --------------->
+
 
     </div>
     <!-------------- End Main Content -------------->

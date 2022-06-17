@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Product;
+use App\Http\Controllers\Controller;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ApiServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        try{
+            $service = Service::all();
+            return response()->json(['service'=>$service], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'service'=>[]], 500);
+        }
     }
 
     /**
@@ -36,7 +42,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $service = new Service();
+            $service->full_name = $request->input('full_name');
+            $service->email = $request->input('email');
+            $service->phone = $request->input('phone');
+
+            if($request->profile_pic && $request->profile_pic->isValid()){
+                $filename = time().'.'.$request->profile_pic->extension();
+                $request->profile_pic->move(public_path('images/services'),$filename);
+                $path = "images/services/$filename";
+                $service->profile_pic = $path;
+            }
+
+            $service->save();
+            return response()->json(['message'=>'Service Added Succesfully','service'=>$service], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'service'=>[]], 500);
+        }
     }
 
     /**
@@ -47,7 +71,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('products.show');
+        //
     }
 
     /**
@@ -79,24 +103,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->reason = $request->input('reason');
-        $product->save();
-        $product->destroy($id);
-        return redirect()->back()->with('success', 'Product Deleted Successfully !');
-    }
-
-    public function deleted_data()
-    {
-        $products = Product::onlyTrashed()->get();
-        return view('products.trash', compact('products'));
-    }
-
-    public function restore($id)
-    {
-        $products = Product::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Product Restored Successfully !');
+        //
     }
 }

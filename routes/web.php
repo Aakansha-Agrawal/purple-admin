@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RenterController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,18 +24,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/bookings', [HomeController::class, 'booking']);
 Route::get('/contact', [HomeController::class, 'contact']);
-Route::get('/renter', [HomeController::class, 'renter']);
 Route::get('/reviews', [HomeController::class, 'review']);
 Route::get('/payments/renter', [HomeController::class, 'payment_renter']);
 Route::get('/payments/provider', [HomeController::class, 'payment_provider']);
 Route::get('/viewdetails', [HomeController::class, 'viewdetails']);
 
-// Route::resource('/services', ServiceController::class);
-Route::resource('/products', ProductController::class);
+// --------- products routes ---------- //
+Route::get('/products',[ProductController::class, 'index']);
+Route::get('/products/{id}/delete',[ProductController::class, 'destroy']);
+Route::get('/products/{id}/restore',[ProductController::class, 'restore']);
+Route::get('/products/trash',[ProductController::class, 'deleted_data']);
 
+// --------- services routes ---------- //
 Route::get('/services',[ServiceController::class, 'index']);
 Route::get('/services/{id}/delete',[ServiceController::class, 'destroy']);
 Route::get('/services/{id}/restore',[ServiceController::class, 'restore']);
 Route::get('/services/trash',[ServiceController::class, 'deleted_data']);
+
+// --------- services routes ---------- //
+Route::get('/renter',[RenterController::class, 'index']);
+Route::get('/renter/{id}/delete',[RenterController::class, 'destroy']);
+Route::get('/renter/{id}/restore',[RenterController::class, 'restore']);
+Route::get('/renter/trash',[RenterController::class, 'deleted_data']);
 
 Route::get('/login', [HomeController::class, 'login']);

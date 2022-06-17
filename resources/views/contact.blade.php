@@ -19,37 +19,32 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5"> Name</th>
+                        <th class="bl5">S No.</th>
+                        <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
+                        <th class="bl5">Phone</th>
                         <th class="bl5">Message</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @if($contact->count() > 0)
+                    @php $i=1; @endphp
+                    @foreach($contact as $data)
                     <tr>
-                        <td data-label="Name">Amit</td>
-                        <td data-label="Email">amitmshr04@gmail.com</td>
-                        <td data-label="Message">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td data-label="SNo">{{ $i }}</td>
+                        <td data-label="Name">{{ $data->name }}</td>
+                        <td data-label="Email">{{ $data->email }}</td>
+                        <td data-label="Phone">{{ $data->phone }}</td>
+                        <td data-label="Message">{{ $data->message }}</td>
+                        <td data-label="Block"><a href="#" onclick="return confirm('Do you want to Delete the Contact?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
                     </tr>
+                    @php $i++; @endphp
+                    @endforeach
+                    @else
                     <tr>
-                        <td data-label="Name">Amit</td>
-                        <td data-label="Email">amitmshr04@gmail.com</td>
-                        <td data-label="Message">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td colspan="5"> No Contacts Found!</td>
                     </tr>
-                    <tr>
-                        <td data-label="Name">Amit</td>
-                        <td data-label="Email">amitmshr04@gmail.com</td>
-                        <td data-label="Message">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Name">Amit</td>
-                        <td data-label="Email">amitmshr04@gmail.com</td>
-                        <td data-label="Message">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Name">Amit</td>
-                        <td data-label="Email">amitmshr04@gmail.com</td>
-                        <td data-label="Message">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class APiProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        try{
+            $products = Product::all();
+            return response()->json(['products'=>$products], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'products'=>[]], 500);
+        }
     }
 
     /**
@@ -36,7 +42,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $product = new Product();
+            $product->name = $request->input('name');
+            $product->service_provider_id = $request->input('service_provider_id');
+            $product->rent_cost = $request->input('rent_cost');
+            $product->stocks = $request->input('stocks');
+
+            $product->save();
+            return response()->json(['message'=>'Product Added Succesfully','product'=>$product], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'product'=>[]], 500);
+        }
     }
 
     /**
@@ -47,7 +65,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('products.show');
+        //
     }
 
     /**
@@ -79,24 +97,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->reason = $request->input('reason');
-        $product->save();
-        $product->destroy($id);
-        return redirect()->back()->with('success', 'Product Deleted Successfully !');
-    }
-
-    public function deleted_data()
-    {
-        $products = Product::onlyTrashed()->get();
-        return view('products.trash', compact('products'));
-    }
-
-    public function restore($id)
-    {
-        $products = Product::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Product Restored Successfully !');
+        //
     }
 }

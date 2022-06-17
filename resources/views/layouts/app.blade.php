@@ -43,9 +43,24 @@
 
     <!-- Logout Modal-->
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
+        // $(document).ready(function() {
+        //     $('#example').DataTable();
+        // });
+
+        // fucntion using in products section for delete with reason
+        function myFunction() {
+            let text;
+            if (confirm("Do you want to delete Product")) {
+
+                let person = prompt("Reason", ".....");
+                if (person == null || person == "") {
+                    text = '';
+                } else {
+                    text = person;
+                }
+            }
+            return text;
+        }
     </script>
 
     <!-- Bootstrap core JavaScript-->

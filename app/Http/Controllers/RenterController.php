@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Renter;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class RenterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $renters = Renter::all();
+        return view('renters.index', compact('renters'));
     }
 
     /**
@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('products.show');
+        //
     }
 
     /**
@@ -79,24 +79,23 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->reason = $request->input('reason');
-        $product->save();
-        $product->destroy($id);
-        return redirect()->back()->with('success', 'Product Deleted Successfully !');
+        // dd('in');
+        $renter = Renter::find($id);
+        $renter->destroy($id);
+        return redirect()->back()->with('success', 'Renter Deleted Successfully !');
     }
 
     public function deleted_data()
     {
-        $products = Product::onlyTrashed()->get();
-        return view('products.trash', compact('products'));
+        $renters = Renter::onlyTrashed()->get();
+        return view('renters.trash', compact('renters'));
     }
 
     public function restore($id)
     {
-        $products = Product::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Product Restored Successfully !');
+        Renter::onlyTrashed()->find($id)->restore();
+        return redirect()->back()->with('success', 'Renter Restored Successfully !');
     }
 }

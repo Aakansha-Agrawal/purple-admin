@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,7 +17,8 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        return view('contact');
+        $contact = Contact::all();
+        return view('contact', compact('contact'));
     }
 
     public function renter(){
@@ -23,7 +26,9 @@ class HomeController extends Controller
     }
 
     public function review(){
-        return view('reviews');
+        $reviews = Review::all();
+        // dd($reviews);
+        return view('reviews', compact('reviews'));
     }
 
     public function service(){

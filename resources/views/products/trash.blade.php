@@ -3,7 +3,6 @@
 @section('content')
 
 @include('layouts.sidebar')
-
 <!----------------- Content Wrapper ------------------->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-------------- Main Content -------------->
@@ -28,7 +27,6 @@
                         <th class="bl5">Service Provider Email</th>
                         <th class="bl5">Rent Cost</th>
                         <th class="bl5">Stocks</th>
-                        <th class="bl5">Product Details</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -43,14 +41,16 @@
                         <td data-label="Service Provider Email">{{ $item->service->email }}</td>
                         <td data-label="Rent Cost">{{ $item->rent_cost }}</td>
                         <td data-label="Stocks">{{ $item->stocks }}</td>
-                        <td data-label="Product Details"><a href="/products/1"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Delete Product"><a href="#" onclick="console.log(myFunction())"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
+                        <td data-label="Block" class="d-flex justify-content-center">
+                            <a href="/products/{{ $item->id }}/restore" onclick="return confirm('Do you want to Restore the user?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
+                            <a href="url_to_delete" onclick="return confirm('Do you want to Delete the user?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>
+                        </td>
                     </tr>
-                    @php $i++; @endphp
+                    @php $i++; @endphp  
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="8"> No Reviews Found!</td>
+                        <td colspan="7"> No Reviews Found!</td>
                     </tr>
                     @endif
                 </tbody>

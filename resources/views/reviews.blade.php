@@ -19,55 +19,39 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5" width="15%"> RENTER NAME</th>
-                        <th class="bl5" width="20%">RENTER email</th>
-                        <th class="bl5" width="15%">SERVICE PROVIDER NAME</th>
-                        <th class="bl5" width="20%"> SERVICE PROVIDER email</th>
-                        <th class="bl5" width="10%">RATINGS</th>
-                        <th class="bl5" width="20%">REVIEW</th>
+                        <th class="bl5">S No.</th>
+                        <th class="bl5"> RENTER NAME</th>
+                        <th class="bl5">RENTER EMAIL</th>
+                        <th class="bl5">SERVICE PROVIDER NAME</th>
+                        <th class="bl5"> SERVICE PROVIDER EMAIL</th>
+                        <th class="bl5">PRODUCT NAME</th>
+                        <th class="bl5"> PRODUCT EMAIL</th>
+                        <th class="bl5">RENTER RATINGS</th>
+                        <th class="bl5">RENTER REVIEWS</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @if($reviews->count() > 0)
+                    @php $i=1; @endphp
+                    @foreach($reviews as $item)
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
-                        <td data-label="Renter Email">amitmshr04@gmail.com</td>
-                        <td data-label="Service Provider Name">Abhishek</td>
-                        <td data-label="Service Provider Email">abhishek123@gmail.com</td>
-                        <td data-label="Ratings">5</td>
-                        <td data-label="Review">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td data-label="Renter Name">{{ $i }}</td>
+                        <td data-label="Renter Name">{{ $item->name }}</td>
+                        <td data-label="Renter Email">{{ $item->email }}</td>
+                        <td data-label="Service Provider Name">{{ $item->service->full_name }}</td>
+                        <td data-label="Service Provider Email">{{ $item->service->email }}</td>
+                        <td data-label="Product Name">{{ $item->product_id }}</td>
+                        <td data-label="Product Email">{{ $item->product_id }}</td>
+                        <td data-label="Ratings">{{ $item->rating }}</td>
+                        <td data-label="Review">{{ $item->review }}</td>
                     </tr>
+                    @php $i++; @endphp
+                    @endforeach
+                    @else
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
-                        <td data-label="Renter Email">amitmshr04@gmail.com</td>
-                        <td data-label="Service Provider Name">Abhishek</td>
-                        <td data-label="Service Provider Email">abhishek123@gmail.com</td>
-                        <td data-label="Ratings">5</td>
-                        <td data-label="Review">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td colspan="9"> No Reviews Found!</td>
                     </tr>
-                    <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
-                        <td data-label="Renter Email">amitmshr04@gmail.com</td>
-                        <td data-label="Service Provider Name">Abhishek</td>
-                        <td data-label="Service Provider Email">abhishek123@gmail.com</td>
-                        <td data-label="Ratings">5</td>
-                        <td data-label="Review">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
-                        <td data-label="Renter Email">amitmshr04@gmail.com</td>
-                        <td data-label="Service Provider Name">Abhishek</td>
-                        <td data-label="Service Provider Email">abhishek123@gmail.com</td>
-                        <td data-label="Ratings">5</td>
-                        <td data-label="Review">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
-                    <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
-                        <td data-label="Renter Email">amitmshr04@gmail.com</td>
-                        <td data-label="Service Provider Name">Abhishek</td>
-                        <td data-label="Service Provider Email">abhishek123@gmail.com</td>
-                        <td data-label="Ratings">5</td>
-                        <td data-label="Review">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                    </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

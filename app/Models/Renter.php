@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Service extends Model
+class Renter extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -15,10 +15,4 @@ class Service extends Model
     ];
 
     protected $dates = ['deleted_at'];
-
-    public function review()
-    {
-        return $this->hasOne(Review::class);
-    }
-
 }

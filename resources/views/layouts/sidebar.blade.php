@@ -22,9 +22,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="users.html" data-toggle="collapse" data-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Services</span>
+            <span>Service Provider</span>
         </a>
         <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -34,10 +34,16 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/renter">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefive" aria-expanded="true" aria-controls="collapsefive">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Renter </span>
+            <span>Renter</span>
         </a>
+        <div id="collapsefive" class="collapse" aria-labelledby="headingfive" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/renter">All Renter Provider</a>
+                <a class="collapse-item" href="/renter/trash">Deleted Renter Provider</a>
+            </div>
+        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -59,7 +65,7 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/products">All Product</a>
-                <a class="collapse-item" href="deleteproduct.html">Deleted Products</a>
+                <a class="collapse-item" href="/products/trash">Deleted Products</a>
             </div>
         </div>
     </li>
