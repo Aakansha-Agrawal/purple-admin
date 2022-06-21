@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         Service::factory(10)->create();
         Renter::factory(10)->create();
         Contact::factory(10)->create();
-        Product::factory(10)->create();
+        // Product::factory(10)->create();
     }
 }

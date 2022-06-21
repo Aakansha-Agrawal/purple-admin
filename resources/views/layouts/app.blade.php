@@ -11,6 +11,8 @@
 
     <title>Admin</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/nunito.css') }}" rel="stylesheet">

@@ -25,6 +25,7 @@ class RenterFactory extends Factory
             'full_name' => $this->faker->name,
             'email' => $this->faker->email,
             'phone' => '8876756565',
+            'payment_status'=>'Processed',
             'profile_pic' => 'images/services/1655384311.png',
         ];
     }

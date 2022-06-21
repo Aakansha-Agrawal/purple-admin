@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(5);
         return view('products.index', compact('products'));
     }
 
@@ -47,7 +47,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return view('products.show');
+        $product = Product::find($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -90,7 +91,7 @@ class ProductController extends Controller
 
     public function deleted_data()
     {
-        $products = Product::onlyTrashed()->get();
+        $products = Product::onlyTrashed()->paginate(5);
         return view('products.trash', compact('products'));
     }
 

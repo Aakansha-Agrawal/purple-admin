@@ -46,7 +46,7 @@
                             <a href="url_to_delete" onclick="return confirm('Do you want to Delete the user?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>
                         </td>
                     </tr>
-                    @php $i++; @endphp  
+                    @php $i++; @endphp
                     @endforeach
                     @else
                     <tr>
@@ -57,6 +57,10 @@
             </table>
         </div>
 
+        <!-- pagination -->
+        <div class="d-flex justify-content-end pr-4">
+            {{ $products->links() }}
+        </div>
         <!-------------- End Product Page Content --------------->
 
     </div>

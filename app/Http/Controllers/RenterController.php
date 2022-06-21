@@ -14,7 +14,7 @@ class RenterController extends Controller
      */
     public function index()
     {
-        $renters = Renter::all();
+        $renters = Renter::paginate(5);
         return view('renters.index', compact('renters'));
     }
 
@@ -89,7 +89,7 @@ class RenterController extends Controller
 
     public function deleted_data()
     {
-        $renters = Renter::onlyTrashed()->get();
+        $renters = Renter::onlyTrashed()->paginate(5);
         return view('renters.trash', compact('renters'));
     }
 

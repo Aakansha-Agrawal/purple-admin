@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ApiBookingController;
 use App\Http\Controllers\API\APiContactController;
 use App\Http\Controllers\API\APiProductController;
 use App\Http\Controllers\API\ApiRenterController;
@@ -37,5 +38,8 @@ Route::post('review',[APiReviewController::class, 'store']);
 
 Route::get('products',[APiProductController::class, 'index']);
 Route::post('products',[APiProductController::class, 'store']);
+
+Route::get('bookings',[ApiBookingController::class, 'index']);
+Route::post('bookings',[ApiBookingController::class, 'store']);
 
 

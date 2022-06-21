@@ -20,6 +20,23 @@ class CreateProductsTable extends Migration
             $table->string('rent_cost');
             $table->string('stocks');
             $table->string('reason')->nullable();
+
+            $table->string('images[]');
+            $table->string('manual_pdf');
+            $table->string('model');
+            $table->string('brand');
+            $table->string('pickup_address');
+            $table->string('shipping_cost');
+            $table->string('description');
+            $table->string('terms_conditions');
+            $table->string('per_day_price');
+            $table->string('per_hour_price');
+            $table->string('two_day_price');
+            $table->string('weekly_price');
+            $table->string('weekend_price');
+            $table->string('package_1');
+            $table->string('package_2');
+
             $table->softDeletes();
             $table->timestamps();
         });

@@ -48,6 +48,11 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- pagination -->
+        <div class="d-flex justify-content-end pr-4">
+            {{ $contact->links() }}
+        </div>
         <!-------------- End Contact Page Content --------------->
 
     </div>

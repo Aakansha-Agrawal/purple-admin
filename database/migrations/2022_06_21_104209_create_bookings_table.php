@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRentersTable extends Migration
+class CreateBookingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateRentersTable extends Migration
      */
     public function up()
     {
-        Schema::create('renters', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('profile_pic')->nullable();
-            $table->enum('payment_status', ['Pending' => 'Pending', 'Processed' => 'Processed', 'Received' => 'Received']);
+            $table->string('renter_id');
+            $table->string('service_provider_id');
+            $table->string('equipment_name');
+            $table->string('purchase_date');
+            $table->string('expiry_date');
+            $table->string('price_type');
+            $table->string('total_price');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +34,6 @@ class CreateRentersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('renters');
+        Schema::dropIfExists('bookings');
     }
 }

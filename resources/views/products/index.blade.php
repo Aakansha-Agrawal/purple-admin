@@ -39,12 +39,12 @@
                     <tr>
                         <td data-label="S No">{{ $i }}</td>
                         <td data-label="Product Name">{{ $item->name }}</td>
-                        <td data-label="Service Provider Name">{{ $item->service->full_name }}</td>
-                        <td data-label="Service Provider Email">{{ $item->service->email }}</td>
+                        <td data-label="Service Provider Name">{{ $item->service_provider_id }}</td>
+                        <td data-label="Service Provider Email">{{ $item->service_provider_id }}</td>
                         <td data-label="Rent Cost">{{ $item->rent_cost }}</td>
                         <td data-label="Stocks">{{ $item->stocks }}</td>
-                        <td data-label="Product Details"><a href="/products/1"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Delete Product"><a href="#" onclick="console.log(myFunction())"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
+                        <td data-label="Product Details"><a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
+                        <td data-label="Delete Product"><a href="/products/{{ $item->id }}/delete" onclick="console.log(myFunction())"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach
@@ -55,6 +55,11 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="d-flex justify-content-end pr-4">
+            {{ $products->links() }}
         </div>
 
         <!-------------- End Product Page Content --------------->

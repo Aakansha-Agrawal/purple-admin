@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Service;
+use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class ApiBookingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,13 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(5);
-        return view('services.index', compact('services'));
+        try{
+            $bookings = Booking::all();
+            return response()->json(['bookings'=>$bookings], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'bookings'=>[]], 500);
+        }
     }
 
     /**
@@ -36,7 +42,22 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $booking = new Booking();
+            $booking->renter_id = $request->input('renter_id');
+            $booking->service_provider_id = $request->input('service_provider_id');
+            $booking->equipment_name = $request->input('equipment_name');
+            $booking->purchase_date = $request->input('purchase_date');
+            $booking->expiry_date = $request->input('expiry_date');
+            $booking->price_type = $request->input('price_type');
+            $booking->total_price = $request->input('total_price');
+
+            $booking->save();
+            return response()->json(['message'=>'Booking Added Succesfully','booking'=>$booking], 200);
+        }
+        catch(\Exception $e){
+            return response()->json(['message'=>$e->getMessage(),'booking'=>[]], 500);
+        }
     }
 
     /**
@@ -81,21 +102,6 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        // dd('in');
-        $service = Service::find($id);
-        $service->destroy($id);
-        return redirect()->back()->with('success', 'Service Deleted Successfully !');
-    }
-
-    public function deleted_data()
-    {
-        $services = Service::onlyTrashed()->paginate(5);
-        return view('services.trash', compact('services'));
-    }
-
-    public function restore($id)
-    {
-        $services = Service::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Service Restored Successfully !');
+        //
     }
 }

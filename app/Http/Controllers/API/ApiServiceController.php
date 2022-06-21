@@ -47,6 +47,8 @@ class ApiServiceController extends Controller
             $service->full_name = $request->input('full_name');
             $service->email = $request->input('email');
             $service->phone = $request->input('phone');
+            $service->price = $request->input('price');
+            $service->payment_status = $request->input('payment_status') ?? 'Pending';
 
             if($request->profile_pic && $request->profile_pic->isValid()){
                 $filename = time().'.'.$request->profile_pic->extension();

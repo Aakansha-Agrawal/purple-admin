@@ -12,27 +12,14 @@ class HomeController extends Controller
         return view('index');
     }
 
-    public function booking(){
-        return view('bookings');
-    }
-
     public function contact(){
-        $contact = Contact::all();
+        $contact = Contact::paginate(5);
         return view('contact', compact('contact'));
     }
 
-    public function renter(){
-        return view('renter');
-    }
-
     public function review(){
-        $reviews = Review::all();
-        // dd($reviews);
+        $reviews = Review::paginate(5);
         return view('reviews', compact('reviews'));
-    }
-
-    public function service(){
-        return view('services');
     }
 
     public function payment_renter(){
@@ -46,9 +33,4 @@ class HomeController extends Controller
     public function login(){
         return view('login');
     }
-
-    public function viewdetails(){
-        return view('viewdetails');
-    }
-
 }

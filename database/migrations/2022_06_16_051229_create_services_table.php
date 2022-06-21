@@ -19,6 +19,8 @@ class CreateServicesTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('profile_pic')->nullable();
+            $table->enum('payment_status', ['Pending' => 'Pending', 'Processed' => 'Processed', 'Received' => 'Received']);
+            $table->string('price');
             $table->softDeletes();
             $table->timestamps();
         });

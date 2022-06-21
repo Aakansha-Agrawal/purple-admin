@@ -47,6 +47,7 @@ class ApiRenterController extends Controller
             $renter->full_name = $request->input('full_name');
             $renter->email = $request->input('email');
             $renter->phone = $request->input('phone');
+            $renter->payment_status = $request->input('payment_status') ?? 'Pending';
 
             if($request->profile_pic && $request->profile_pic->isValid()){
                 $filename = time().'.'.$request->profile_pic->extension();

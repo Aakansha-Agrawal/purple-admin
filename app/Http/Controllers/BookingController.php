@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(5);
-        return view('services.index', compact('services'));
+        $bookings = Booking::paginate(5);
+        return view('bookings.index', compact('bookings'));
     }
 
     /**
@@ -47,7 +47,8 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $booking = Booking::find($id);
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -81,21 +82,8 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        // dd('in');
-        $service = Service::find($id);
-        $service->destroy($id);
-        return redirect()->back()->with('success', 'Service Deleted Successfully !');
-    }
-
-    public function deleted_data()
-    {
-        $services = Service::onlyTrashed()->paginate(5);
-        return view('services.trash', compact('services'));
-    }
-
-    public function restore($id)
-    {
-        $services = Service::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Service Restored Successfully !');
+        $booking = Booking::find($id);
+        $booking->destroy($id);
+        return redirect()->back()->with('success', 'Booking Deleted Successfully !');
     }
 }

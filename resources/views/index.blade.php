@@ -47,7 +47,7 @@
     <!-------------- End Main Content -------------->
 
     @include('layouts.footer')
-    
+pin    
 </div>
 <!---------------------- End Content Wrapper -------------->
 

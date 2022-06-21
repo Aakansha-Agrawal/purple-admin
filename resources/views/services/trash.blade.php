@@ -26,7 +26,9 @@
                         <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>
-                        <th class="bl5"> Profile Picture</th>
+                        <th class="bl5">Profile Picture</th>
+                        <th class="bl5">Payment Status</th>
+                        <th class="bl5">Price</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -40,9 +42,19 @@
                         <td data-label="Email">{{ $service->email }}</td>
                         <td data-label="Phone">{{ $service->phone }}</td>
                         <td data-label="Profile Picture"><img src="/{{ $service->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>
+                        <td data-label="Status">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option {{ $service->payment_status == 'Pending' ? 'selected':'' }}>Pending</option>
+                                    <option {{ $service->payment_status == 'Processed' ? 'selected':'' }}>Processed</option>
+                                    <option {{ $service->payment_status == 'Received' ? 'selected':'' }}>Received</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td data-label="price">{{ $service->price }}</td>
                         <td data-label="Block" class="d-flex justify-content-center">
-                            <a href="/services/{{ $service->id }}/restore" onclick="return confirm('Do you want to Restore the user?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
-                            <a href="/services/{{ $service->id }}/delete" onclick="return confirm('Do you want to Delete the user?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>
+                            <a href="/services/{{ $service->id }}/restore" onclick="return confirm('Do you want to Restore the Service?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
+                            <a href="/services/{{ $service->id }}/delete" onclick="return confirm('Do you want to Delete the Service?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>
                         </td>
                     </tr>
                     @php $i++; @endphp
@@ -54,6 +66,11 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="d-flex justify-content-end pr-4">
+            {{ $services->links() }}
         </div>
         <!-------------- End Services Page Content --------------->
 

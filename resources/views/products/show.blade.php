@@ -16,36 +16,11 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Product Details</h1>
             </div>
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th class="bl5"> Product Name</th>
-                        <th class="bl5">Product Images</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-label="Product Name">Product Name</td>
-                        <td data-label="Product Images"></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Product Name">Product Name</td>
-                        <td data-label="Product Images"></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Product Name">Product Name</td>
-                        <td data-label="Product Images"></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Product Name">Product Name</td>
-                        <td data-label="Product Images"></td>
-                    </tr>
-                    <tr>
-                        <td data-label="Product Name">Product Name</td>
-                        <td data-label="Product Images"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="d-flex">
+                <div class="">
+                    
+                </div>
+            </div>
         </div>
         <!-------------- End Product Page Content --------------->
     </div>

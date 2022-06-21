@@ -27,7 +27,8 @@
                         <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>
-                        <th class="bl5"> Profile Picture</th>
+                        <th class="bl5">Profile Picture</th>
+                        <th class="bl5">Payment Status</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -41,6 +42,15 @@
                         <td data-label="Email">{{ $renter->email }}</td>
                         <td data-label="Phone">{{ $renter->phone }}</td>
                         <td data-label="Profile Picture"><img src="/{{ $renter->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>
+                        <td data-label="Status">
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option {{ $renter->payment_status == 'Pending' ? 'selected':'' }}>Pending</option>
+                                    <option {{ $renter->payment_status == 'Processed' ? 'selected':'' }}>Processed</option>
+                                    <option {{ $renter->payment_status == 'Received' ? 'selected':'' }}>Received</option>
+                                </select>
+                            </div>
+                        </td>
                         <td data-label="Block" class="d-flex justify-content-center">
                             <a href="/renter/{{ $renter->id }}/restore" onclick="return confirm('Do you want to Restore the user?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
                             <a href="/renter/{{ $renter->id }}/delete" onclick="return confirm('Do you want to Delete the renter?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a>
@@ -55,6 +65,11 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="d-flex justify-content-end pr-4">
+            {{ $renters->links() }}
         </div>
         <!-------------- End Renter Page Content --------------->
 

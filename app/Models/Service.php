@@ -21,4 +21,9 @@ class Service extends Model
         return $this->hasOne(Review::class);
     }
 
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
+
 }
