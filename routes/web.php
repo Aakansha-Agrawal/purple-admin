@@ -50,6 +50,7 @@ Route::get('/renter/trash',[RenterController::class, 'deleted_data']);
 
 // --------- bookings routes ---------- //
 Route::get('/bookings',[BookingController::class, 'index']);
+Route::get('/bookings/closed',[BookingController::class, 'closed']);
 Route::get('/bookings/{id}/view',[BookingController::class, 'show']);
 Route::get('/bookings/{id}/delete',[BookingController::class, 'destroy']);
 

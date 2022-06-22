@@ -53,7 +53,7 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="/bookings">Active Bookings</a>
-                <a class="collapse-item" href="closedbookings.html">Closed Bookings</a>
+                <a class="collapse-item" href="/bookings/closed">Closed Bookings</a>
             </div>
         </div>
     </li>

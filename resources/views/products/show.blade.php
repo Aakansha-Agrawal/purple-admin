@@ -16,10 +16,47 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Product Details</h1>
             </div>
-            <div class="d-flex">
-                <div class="">
-                    
+            <div class="row">
+                <div class="col-md-5">
+                    <img src="{{ asset('images/index.png') }}" alt="product" width="500px" height="400px">
                 </div>
+                <div class="col-md-7">
+                    <div class="mb-3">
+                        <h2 class="text-dark">{{ $product->name }}</h2>
+                        <h4>Model - {{ $product->model }}</h4>
+                        <h4>Brand - {{ $product->brand }}</h4>
+
+                        <div class="d-flex mt-3">
+                            <div class="mr-4">
+                                <h5>Per Day Price - {{ $product->per_day_price }}</h5>
+                                <h5>Per Hour Price - {{ $product->per_hour_price }}</h5>
+                                <h5>Two Day Price - {{ $product->two_day_price }}</h5>
+                            </div>
+                            <div class="ml-4">
+                                <h5>Weekly Price - {{ $product->weekly_price }}</h5>
+                                <h5>Weekend Price - {{ $product->weekend_price }}</h5>
+                                <h5>Shipping Cost - {{ $product->shipping_cost }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="text-dark"><b>Description -</b></h5>
+                        <p>{{ $product->description }}</p>
+                    </div>
+                    <div>
+                        <button>Download PDF</button>
+                        <div class="mt-3">
+                            Package 1 - {{ $product->package_1 }}
+                        </div>
+                        <div>
+                            Package 2 - {{ $product->package_2 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <h4 class="text-dark"><b>Terms & Conditions</b></h4>
+                <p>{{ $product->terms_conditions }}</p>
             </div>
         </div>
         <!-------------- End Product Page Content --------------->

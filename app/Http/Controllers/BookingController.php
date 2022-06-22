@@ -18,6 +18,12 @@ class BookingController extends Controller
         return view('bookings.index', compact('bookings'));
     }
 
+    public function closed()
+    {
+        $bookings = Booking::paginate(5);
+        return view('bookings.closed', compact('bookings'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
