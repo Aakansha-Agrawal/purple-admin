@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
-class APiReviewController extends Controller
+class ApiReviewController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -17,8 +17,8 @@ class Product extends Model
         return $this->belongsTo(Service::class, 'service_provider_id');
     }
 
-    public function images()
+    public function product_images()
     {
-        return $this->hasMany(Image::class, 'product_id');
+        return $this->hasMany(ProductImage::class, 'product_id');
     }
 }

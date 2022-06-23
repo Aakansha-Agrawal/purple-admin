@@ -17,10 +17,18 @@
                 <h1 class="h3 mb-0 text-gray-800">Product Details</h1>
             </div>
             <div class="row">
-                <div class="col-md-5">
-                    <img src="{{ asset('images/index.png') }}" alt="product" width="500px" height="400px">
+                <div class="col-md-6">
+                    <div class="w3-content w3-display-container">
+
+                        @foreach($product->product_images as $image)
+                        <img src="/{{ $image->url }}" class="mySlides" alt="product" width="100%" height="400px" />
+                        @endforeach
+
+                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                    </div>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-5">
                     <div class="mb-3">
                         <h2 class="text-dark">{{ $product->name }}</h2>
                         <h4>Model - {{ $product->model }}</h4>
@@ -44,7 +52,11 @@
                         <p>{{ $product->description }}</p>
                     </div>
                     <div>
-                        <button>Download PDF</button>
+                        <a href="{{ url('') }}/{{$product->manual_pdf}}" target="_blank">
+                            <b>
+                                <h5><i class="fa fa-download mr-1" aria-hidden="true"></i>Download</h5>
+                            </b>
+                        </a>
                         <div class="mt-3">
                             Package 1 - {{ $product->package_1 }}
                         </div>

@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
-class APiProductController extends Controller
+class ApiProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -75,8 +75,8 @@ class APiProductController extends Controller
             $product->save();
 
             foreach ($request->file('images') as $imagefile) {
-                $image = new Image();
-                $path = $imagefile->store('/images/resource', ['disk' =>   'my_files']);
+                $image = new ProductImage();
+                $path = $imagefile->store('/images/products', ['disk' =>   'my_files']);
                 $image->url = $path;
                 $image->product_id = $product->id;
                 $image->save();
@@ -84,7 +84,7 @@ class APiProductController extends Controller
 
             return response()->json(['message' => 'Product Added Succesfully', 'product' => $product], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'product' => [], 'image' => []], 500);
+            return response()->json(['message' => $e->getMessage(), 'product' => [],], 500);
         }
     }
 

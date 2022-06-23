@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -48,6 +51,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        // dd($product->product_images);
         return view('products.show', compact('product'));
     }
 
@@ -99,5 +103,15 @@ class ProductController extends Controller
     {
         $products = Product::onlyTrashed()->find($id)->restore();
         return redirect()->back()->with('success', 'Product Restored Successfully !');
+    }
+
+    public function download($url)
+    {
+        $file_path_full = base_path() . "/pdf/products/" . $url;
+        $file_path = pathinfo(base_path() . "/pdf/products/" . $url);
+
+        $basename = $file_path['basename'];
+        $path = $file_path['dirname'];
+        return response()->download($file_path_full, $basename, ['Content-Type' => 'application/force-download']);
     }
 }

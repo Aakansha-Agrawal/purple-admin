@@ -35,6 +35,7 @@ Route::get('/products/{id}/view',[ProductController::class, 'show']);
 Route::get('/products/{id}/delete',[ProductController::class, 'destroy']);
 Route::get('/products/{id}/restore',[ProductController::class, 'restore']);
 Route::get('/products/trash',[ProductController::class, 'deleted_data']);
+Route::get('/{file}',[ProductController::class, 'download']);
 
 // --------- services routes ---------- //
 Route::get('/services',[ServiceController::class, 'index']);

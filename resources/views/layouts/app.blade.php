@@ -11,8 +11,8 @@
 
     <title>Admin</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/nunito.css') }}" rel="stylesheet">
@@ -25,6 +25,14 @@
     <script src="{{ asset('assets/js/jquery-3.5.1.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
+
+    <!-- for product slider -->
+    <style>
+        .mySlides {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- <link href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet"> -->
 
@@ -49,7 +57,7 @@
         //     $('#example').DataTable();
         // });
 
-        // fucntion using in products section for delete with reason
+        // function using in products section for delete with reason
         function myFunction() {
             let text;
             if (confirm("Do you want to delete Product")) {
@@ -62,6 +70,30 @@
                 }
             }
             return text;
+        }
+
+
+        // for product slider
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+            showDivs(slideIndex += n);
+        }
+
+        function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            x[slideIndex - 1].style.display = "block";
         }
     </script>
 
