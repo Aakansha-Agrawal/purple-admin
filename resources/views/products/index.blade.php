@@ -44,7 +44,7 @@
                         <td data-label="Stocks">{{ $item->stocks }}</td>
                         <td data-label="Delete Product" class="d-flex justify-content-center">
                             <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a>
-                            <a href="#" onclick="{var reason = myFunction()}"><button type="button" class="btn btn-secondary ml-1" style="background:#5600d4">Delete</button></a>
+                            <a href="#" onclick="{var $reason = myFunction(); alert($reason) }"><button type="button" class="btn btn-secondary ml-1" style="background:#5600d4">Delete</button></a>
                         </td>
                     </tr>
                     @php $i++; @endphp
