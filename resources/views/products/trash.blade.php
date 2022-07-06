@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Deleted Products</h1>
+                <h1 class="h3 mb-0 text-gray-800">Rejected Products</h1>
             </div>
             <div class="app">
                 @include('flash-message')
@@ -37,10 +37,10 @@
                     <tr>
                         <td data-label="S No">{{ $i }}</td>
                         <td data-label="Product Name">{{ $item->name }}</td>
-                        <td data-label="Service Provider Name">{{ $item->service->full_name }}</td>
-                        <td data-label="Service Provider Email">{{ $item->service->email }}</td>
-                        <td data-label="Rent Cost">{{ $item->rent_cost }}</td>
-                        <td data-label="Stocks">{{ $item->stocks }}</td>
+                        <td data-label="Product brand">{{ $item->brand }}</td>
+                        <td data-label="Product model">{{ $item->model }}</td>
+                        <td data-label="Product category">{{ $item->category->cat_name}}</td>
+                        <td data-label="status">{{ $item->status }}</td>
                         <td data-label="Block" class="d-flex justify-content-center">
                             <a href="/products/{{ $item->id }}/restore" onclick="return confirm('Do you want to Restore the user?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Restore</button></a>
                             <a href="url_to_delete" onclick="return confirm('Do you want to Delete the user?');"><button type="button" class="btn btn-secondary ml-2" style="background:#5600d4">Delete</button></a>

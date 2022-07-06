@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ApiAuthController;
+use App\Http\Controllers\API\ApiForgetPasswordController;
 use App\Http\Controllers\API\ApiBookingController;
 use App\Http\Controllers\API\ApiContactController;
 use App\Http\Controllers\API\ApiProductController;
@@ -41,5 +43,15 @@ Route::post('products',[ApiProductController::class, 'store']);
 
 Route::get('bookings',[ApiBookingController::class, 'index']);
 Route::post('bookings',[ApiBookingController::class, 'store']);
+
+Route::post('login', [ApiAuthController::class, 'login']);
+Route::post('register', [ApiAuthController::class, 'register']);
+Route::post('forgot-password', [ApiForgetPasswordController::class, 'forgotPassword']);
+Route::post('password-reset/{token}', [ApiForgetPasswordController::class, 'sendResetResponse']);
+
+Route::middleware('auth:sanctum', 'verified')->group(function () {
+
+    Route::post('logout', [ApiAuthController::class, 'logout']);
+});
 
 

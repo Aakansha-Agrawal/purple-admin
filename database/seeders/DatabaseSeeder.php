@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Renter;
@@ -18,10 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
         Service::factory(10)->create();
         Renter::factory(10)->create();
         Contact::factory(10)->create();
-        // Product::factory(10)->create();
+        Booking::factory(10)->create();
+
+        $this->call([
+            AdminSeeder::class
+        ]);
     }
 }

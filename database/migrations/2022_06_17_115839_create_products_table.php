@@ -35,6 +35,8 @@ class CreateProductsTable extends Migration
             $table->string('weekend_price');
             $table->string('package_1');
             $table->string('package_2');
+            $table->enum('status', ['accept' => 'Accept', 'reject' => 'Reject']);
+            $table->integer('category_id');
 
             $table->softDeletes();
             $table->timestamps();

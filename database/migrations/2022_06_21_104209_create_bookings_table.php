@@ -18,8 +18,12 @@ class CreateBookingsTable extends Migration
             $table->string('renter_id');
             $table->string('service_provider_id');
             $table->string('equipment_name');
-            $table->string('purchase_date');
+            $table->string('package_taken');
+            $table->string('quantity');
+            $table->string('delivery_type');
             $table->string('expiry_date');
+            $table->string('purchase_date');
+            $table->string('return_date');
             $table->string('price_type');
             $table->string('total_price');
             $table->softDeletes();

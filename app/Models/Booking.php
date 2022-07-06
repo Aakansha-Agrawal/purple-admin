@@ -10,7 +10,7 @@ class Booking extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['renter_id', 'service_provider_id', 'equipment_name', 'purchase_date', 'expiry_date', 'price_type', 'total_price'];
+    protected $fillable = ['renter_id', 'service_provider_id', 'equipment_name', 'purchase_date', 'expiry_date', 'price_type', 'total_price', 'package_taken', 'quantity', 'delivery_type', 'retun_date'];
 
     public function service()
     {

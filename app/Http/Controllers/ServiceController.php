@@ -84,7 +84,7 @@ class ServiceController extends Controller
         // dd('in');
         $service = Service::find($id);
         $service->destroy($id);
-        return redirect()->back()->with('success', 'Service Deleted Successfully !');
+        return redirect()->back()->with('success', 'Service Provider Deleted Successfully !');
     }
 
     public function deleted_data()
@@ -96,6 +96,6 @@ class ServiceController extends Controller
     public function restore($id)
     {
         $services = Service::onlyTrashed()->find($id)->restore();
-        return redirect()->back()->with('success', 'Service Restored Successfully !');
+        return redirect()->back()->with('success', 'Service Provider Restored Successfully !');
     }
 }

@@ -10,12 +10,12 @@
 
         @include('layouts.navbar')
 
-        <!------------- Begin Renter Page Content ------------>
+        <!------------- Begin End User Page Content ------------>
         <div class="container-fluid">
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Renter</h1>
+                <h1 class="h3 mb-0 text-gray-800">End User</h1>
             </div>
             <div class="app">
                 @include('flash-message')
@@ -28,7 +28,7 @@
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>
                         <th class="bl5">Profile Picture</th>
-                        <th class="bl5">Payment Status</th>
+                        <!-- <th class="bl5">Payment Status</th> -->
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -42,7 +42,7 @@
                         <td data-label="Email">{{ $renter->email }}</td>
                         <td data-label="Phone">{{ $renter->phone }}</td>
                         <td data-label="Profile Picture"><img src="/{{ $renter->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>
-                        <td data-label="Status">
+                        <!-- <td data-label="Status">
                             <div class="input-group mb-3">
                                 <select class="custom-select" id="inputGroupSelect01">
                                     <option {{ $renter->payment_status == 'Pending' ? 'selected':'' }}>Pending</option>
@@ -50,14 +50,14 @@
                                     <option {{ $renter->payment_status == 'Received' ? 'selected':'' }}>Received</option>
                                 </select>
                             </div>
-                        </td>
-                        <td data-label="Block"><a href="/renter/{{ $renter->id }}/delete" onclick="return confirm('Do you want to Delete the renter?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
+                        </td> -->
+                        <td data-label="Block"><a href="/end-user/{{ $renter->id }}/delete" onclick="return confirm('Do you want to Delete the End User?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="5"> No Renters Found!</td>
+                        <td colspan="6"> No End Users Found!</td>
                     </tr>
                     @endif
                 </tbody>

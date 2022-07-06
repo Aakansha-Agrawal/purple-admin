@@ -18,7 +18,7 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5" width=""> RENTER NAME</th>
+                        <th class="bl5" width=""> END USER NAME</th>
                         <th class="bl5" width="">Product Details</th>
                         <th class="bl5" width="">Total Amount</th>
                         <th class="bl5" width="">Payment mode</th>
@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
+                        <td data-label="End User Name">Amit Mishra</td>
                         <td data-label="Product Details"><a href="productdetails.html"><button type="button"
                                     class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
                         <td data-label="Total Amount">50$</td>
@@ -45,7 +45,7 @@
                         <td data-label="Admin Commission">2%</td>
                     </tr>
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
+                        <td data-label="End User Name">Amit Mishra</td>
                         <td data-label="Product Details"><a href="productdetails.html"><button type="button"
                                     class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
                         <td data-label="Total Amount">50$</td>
@@ -62,7 +62,7 @@
                         <td data-label="Admin Commission">2%</td>
                     </tr>
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
+                        <td data-label="End User Name">Amit Mishra</td>
                         <td data-label="Product Details"><a href="productdetails.html"><button type="button"
                                     class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
                         <td data-label="Total Amount">50$</td>
@@ -79,7 +79,7 @@
                         <td data-label="Admin Commission">2%</td>
                     </tr>
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
+                        <td data-label="End User Name">Amit Mishra</td>
                         <td data-label="Product Details"><a href="productdetails.html"><button type="button"
                                     class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
                         <td data-label="Total Amount">50$</td>
@@ -96,7 +96,7 @@
                         <td data-label="Admin Commission">2%</td>
                     </tr>
                     <tr>
-                        <td data-label="Renter Name">Amit Mishra</td>
+                        <td data-label="End User Name">Amit Mishra</td>
                         <td data-label="Product Details"><a href="productdetails.html"><button type="button"
                                     class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
                         <td data-label="Total Amount">50$</td>

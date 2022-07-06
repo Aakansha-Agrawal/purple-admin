@@ -20,14 +20,14 @@
                 <thead>
                     <tr>
                         <th class="bl5">S No.</th>
-                        <th class="bl5"> RENTER NAME</th>
-                        <th class="bl5">RENTER EMAIL</th>
+                        <th class="bl5"> END USER NAME</th>
+                        <th class="bl5">END USER EMAIL</th>
                         <th class="bl5">SERVICE PROVIDER NAME</th>
                         <th class="bl5"> SERVICE PROVIDER EMAIL</th>
                         <th class="bl5">PRODUCT NAME</th>
                         <th class="bl5"> PRODUCT EMAIL</th>
-                        <th class="bl5">RENTER RATINGS</th>
-                        <th class="bl5">RENTER REVIEWS</th>
+                        <th class="bl5">END USER RATINGS</th>
+                        <th class="bl5">END USER REVIEWS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +35,9 @@
                     @php $i=1; @endphp
                     @foreach($reviews as $item)
                     <tr>
-                        <td data-label="Renter Name">{{ $i }}</td>
-                        <td data-label="Renter Name">{{ $item->name }}</td>
-                        <td data-label="Renter Email">{{ $item->email }}</td>
+                        <td data-label="End User Name">{{ $i }}</td>
+                        <td data-label="End User Name">{{ $item->name }}</td>
+                        <td data-label="End User Email">{{ $item->email }}</td>
                         <td data-label="Service Provider Name">{{ $item->service->full_name }}</td>
                         <td data-label="Service Provider Email">{{ $item->service->email }}</td>
                         <td data-label="Product Name">{{ $item->product_id }}</td>

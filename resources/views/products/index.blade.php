@@ -22,12 +22,12 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5">S No</th>
+                        <th class="bl5">S.No</th>
                         <th class="bl5">Name</th>
-                        <th class="bl5">Service Provider Name</th>
-                        <th class="bl5">Service Provider Email</th>
-                        <th class="bl5">Rent Cost</th>
-                        <th class="bl5">Stocks</th>
+                        <th class="bl5">Brand</th>
+                        <th class="bl5">Model</th>
+                        <th class="bl5">Category</th>
+                        <th class="bl5">Status</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -38,10 +38,13 @@
                     <tr>
                         <td data-label="S No">{{ $i }}</td>
                         <td data-label="Product Name">{{ $item->name }}</td>
-                        <td data-label="Service Provider Name">{{ $item->service->full_name }}</td>
-                        <td data-label="Service Provider Email">{{ $item->service->email }}</td>
-                        <td data-label="Rent Cost">{{ $item->rent_cost }}</td>
-                        <td data-label="Stocks">{{ $item->stocks }}</td>
+                        <td data-label="Product brand">{{ $item->brand }}</td>
+                        <td data-label="Product model">{{ $item->model }}</td>
+                        <td data-label="Product category">{{ $item->category->cat_name}}</td>
+                        <td data-label="status">
+                            <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:green">Accept</button></a>
+                            <a href="#"><button type="button" class="btn btn-secondary ml-1" style="background:red">Reject</button></a>
+                        </td>
                         <td data-label="Delete Product" class="d-flex justify-content-center">
                             <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a>
                             <a href="#" onclick="{var $reason = myFunction(); alert($reason) }"><button type="button" class="btn btn-secondary ml-1" style="background:#5600d4">Delete</button></a>

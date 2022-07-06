@@ -17,8 +17,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $products = Product::paginate(7);
         return view('products.index', compact('products'));
+    }
+
+    public function approve()
+    {
+        $products = Product::where('status','accept')->paginate(7);
+        return view('products.approve', compact('products'));
     }
 
     /**
@@ -95,7 +101,7 @@ class ProductController extends Controller
 
     public function deleted_data()
     {
-        $products = Product::onlyTrashed()->paginate(5);
+        $products = Product::where('status','reject')->withTrashed()->paginate(6);
         return view('products.trash', compact('products'));
     }
 

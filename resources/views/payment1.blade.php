@@ -22,9 +22,9 @@
                         <th class="bl5" width="14%" style="font-size:12px!important">Service Provider Name</th>
                         <th class="bl5" width="8%" style="font-size:12px!important">Service Provider bank details</th>
                         <th class="bl5" width="20%" style="font-size:12px!important">Service provider email</th>
-                        <th class="bl5" width="14%" style="font-size:12px!important">Renter Name</th>
+                        <th class="bl5" width="14%" style="font-size:12px!important">End User Name</th>
                         <th class="bl5" width="8%" style="font-size:12px!important">Product Details</th>
-                        <th class="bl5" width="8%" style="font-size:12px!important">Total Amount (Renter)</th>
+                        <th class="bl5" width="8%" style="font-size:12px!important">Total Amount (End User)</th>
                         <th class="bl5" width="8%" style="font-size:12px!important">Total Amount (Service Provider)</th>
                         <th class="bl5" width="8%" style="font-size:12px!important">Payment Status</th>
                         <th class="bl5" width="12%" style="font-size:12px!important">Admin Commission</th>
@@ -35,9 +35,9 @@
                         <td data-label="Service Provider Name">Amit Mishra</td>
                         <td data-label="Service Provider Bank Details">ICICI Bank</td>
                         <td data-label="Service Provider Email">amitmshr04@gmail.com</td>
-                        <td data-label="Renter Name">Abhishek</td>
+                        <td data-label="End User Name">Abhishek</td>
                         <td data-label="Product Details"><a href="productdetails1.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Total Amount(Renter)">50$</td>
+                        <td data-label="Total Amount(End User)">50$</td>
                         <td data-label="Total Amount(Service Provider)">80$</td>
                         <td data-label="Payment Status">
                             <div class="input-group mb-3">
@@ -54,9 +54,9 @@
                         <td data-label="Service Provider Name">Amit Mishra</td>
                         <td data-label="Service Provider Bank Details">ICICI Bank</td>
                         <td data-label="Service Provider Email">amitmshr04@gmail.com</td>
-                        <td data-label="Renter Name">Abhishek</td>
+                        <td data-label="End User Name">Abhishek</td>
                         <td data-label="Product Details"><a href="productdetails1.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Total Amount(Renter)">50$</td>
+                        <td data-label="Total Amount(End User)">50$</td>
                         <td data-label="Total Amount(Service Provider)">80$</td>
                         <td data-label="Payment Status">
                             <div class="input-group mb-3">
@@ -73,9 +73,9 @@
                         <td data-label="Service Provider Name">Amit Mishra</td>
                         <td data-label="Service Provider Bank Details">ICICI Bank</td>
                         <td data-label="Service Provider Email">amitmshr04@gmail.com</td>
-                        <td data-label="Renter Name">Abhishek</td>
+                        <td data-label="End User Name">Abhishek</td>
                         <td data-label="Product Details"><a href="productdetails1.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Total Amount(Renter)">50$</td>
+                        <td data-label="Total Amount(End User)">50$</td>
                         <td data-label="Total Amount(Service Provider)">80$</td>
                         <td data-label="Payment Status">
                             <div class="input-group mb-3">
@@ -92,9 +92,9 @@
                         <td data-label="Service Provider Name">Amit Mishra</td>
                         <td data-label="Service Provider Bank Details">ICICI Bank</td>
                         <td data-label="Service Provider Email">amitmshr04@gmail.com</td>
-                        <td data-label="Renter Name">Abhishek</td>
+                        <td data-label="End User Name">Abhishek</td>
                         <td data-label="Product Details"><a href="productdetails1.html"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a></td>
-                        <td data-label="Total Amount(Renter)">50$</td>
+                        <td data-label="Total Amount(End User)">50$</td>
                         <td data-label="Total Amount(Service Provider)">80$</td>
                         <td data-label="Payment Status">
                             <div class="input-group mb-3">

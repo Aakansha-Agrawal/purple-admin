@@ -64,6 +64,8 @@ class ApiProductController extends Controller
             $product->weekend_price = $request->input('weekend_price');
             $product->package_1 = $request->input('package_1');
             $product->package_2 = $request->input('package_2');
+            $product->status = $request->input('status');
+            $product->category_id = $request->input('category_id');
 
             if ($request->manual_pdf && $request->manual_pdf->isValid()) {
                 $filename = time() . '.' . $request->manual_pdf->extension();

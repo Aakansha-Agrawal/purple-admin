@@ -21,7 +21,7 @@
                         <th class="bl5">Price Type</th>
                         <th class="bl5">Total Price</th>
                         <th class="bl5">Expiry Date</th>
-                        <th class="bl5">Renter Payment Status</th>
+                        <th class="bl5">End User Payment Status</th>
                         <th class="bl5">Service Provider Price</th>
                         <th class="bl5">Service Provider Status</th>
                     </tr>
@@ -31,7 +31,7 @@
                         <td data-label="Price Type">{{ $booking->price_type }}</td>
                         <td data-label="TOtal Price">{{ $booking->total_price }}</td>
                         <td data-label="Expiry Date">{{ $booking->expiry_date }}</td>
-                        <td data-label="Renter Payment Status">
+                        <td data-label="End User Payment Status">
                         <div class="input-group mb-3">
                                 <select class="custom-select" id="inputGroupSelect01">
                                     <option {{ $booking->renter_payment_status == 'Pending' ? 'selected':'' }}>Pending</option>
