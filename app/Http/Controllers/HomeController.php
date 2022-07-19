@@ -29,8 +29,4 @@ class HomeController extends Controller
     public function payment_provider(){
         return view('payment1');
     }
-
-    public function login(){
-        return view('login');
-    }
 }

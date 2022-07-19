@@ -23,7 +23,7 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5">SNo.</th>
+                        <th class="bl5">S.No</th>
                         <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>
@@ -38,7 +38,7 @@
                     @foreach($renters as $renter)
                     <tr>
                         <td data-label="SNo">{{ $i }}</td>
-                        <td data-label="Full Name">{{ $renter->full_name }}</td>
+                        <td data-label="Full Name">{{ $renter->name }}</td>
                         <td data-label="Email">{{ $renter->email }}</td>
                         <td data-label="Phone">{{ $renter->phone }}</td>
                         <td data-label="Profile Picture"><img src="/{{ $renter->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>

@@ -10,11 +10,21 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'service_provider_id', 'product_id', 'rating', 'review'];
+    protected $fillable = ['renter_id', 'service_provider_id', 'product_id', 'rating', 'review'];
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'service_provider_id');
+        return $this->belongsTo(User::class, 'service_provider_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function renter()
+    {
+        return $this->belongsTo(User::class, 'renter_id');
     }
 
 }

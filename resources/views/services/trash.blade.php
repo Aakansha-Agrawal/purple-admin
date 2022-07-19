@@ -36,7 +36,7 @@
                     @foreach($services as $service)
                     <tr>
                         <td data-label="SNo">{{ $i }}</td>
-                        <td data-label="Full Name">{{ $service->full_name }}</td>
+                        <td data-label="Full Name">{{ $service->name }}</td>
                         <td data-label="Email">{{ $service->email }}</td>
                         <td data-label="Phone">{{ $service->phone }}</td>
                         <td data-label="Profile Picture"><img src="/{{ $service->profile_pic }}" alt="image" width="70px" height="60px" class="img-circle"></td>

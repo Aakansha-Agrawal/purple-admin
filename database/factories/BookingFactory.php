@@ -14,8 +14,8 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-            'renter_id' => '1',
-            'service_provider_id' => '1',
+            'renter_id' => '3',
+            'service_provider_id' => '8',
             'equipment_name' => $this->faker->name,
             'package_taken' => $this->faker->name,
             'quantity' => 100,

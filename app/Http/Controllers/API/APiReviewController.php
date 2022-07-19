@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiReviewController extends Controller
 {
@@ -43,9 +44,8 @@ class ApiReviewController extends Controller
     {
         try {
             $review = new Review();
-            $review->name = $request->input('name');
-            $review->email = $request->input('email');
             $review->service_provider_id = $request->input('service_provider_id');
+            $review->renter_id = Auth::user()->id;
             $review->product_id = $request->input('product_id');
             $review->rating = $request->input('rating');
             $review->review = $request->input('review');

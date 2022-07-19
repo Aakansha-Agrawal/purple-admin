@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Renter;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RenterController extends Controller
@@ -14,7 +14,7 @@ class RenterController extends Controller
      */
     public function index()
     {
-        $renters = Renter::paginate(5);
+        $renters = User::where('role','renter')->paginate(5);
         return view('renters.index', compact('renters'));
     }
 
@@ -82,20 +82,20 @@ class RenterController extends Controller
     public function destroy($id)
     {
         // dd('in');
-        $renter = Renter::find($id);
+        $renter = User::find($id);
         $renter->destroy($id);
         return redirect()->back()->with('success', 'Renter Deleted Successfully !');
     }
 
     public function deleted_data()
     {
-        $renters = Renter::onlyTrashed()->paginate(5);
+        $renters = User::onlyTrashed()->paginate(5);
         return view('renters.trash', compact('renters'));
     }
 
     public function restore($id)
     {
-        Renter::onlyTrashed()->find($id)->restore();
+        User::onlyTrashed()->find($id)->restore();
         return redirect()->back()->with('success', 'Renter Restored Successfully !');
     }
 }

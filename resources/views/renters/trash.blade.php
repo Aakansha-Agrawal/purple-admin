@@ -23,7 +23,7 @@
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th class="bl5">SNo</th>
+                        <th class="bl5">S.No</th>
                         <th class="bl5">Name</th>
                         <th class="bl5">Email</th>
                         <th class="bl5">Phone</th>

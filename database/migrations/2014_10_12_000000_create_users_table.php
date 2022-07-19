@@ -17,10 +17,13 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone');
             $table->string('role')->nullable();
+            $table->string('profile_pic')->nullable();
+            $table->enum('payment_status', ['Pending' => 'Pending', 'Processed' => 'Processed', 'Received' => 'Received']);
+            $table->string('price')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

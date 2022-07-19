@@ -30,9 +30,18 @@ class ApiAuthController extends Controller
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'role' => 'user',
+                'role' => $request->role,
                 'password' => Hash::make($request->input('password')),
+                'price' => $request->input('price'),
+                'payment_status' => $request->input('payment_status') ?? 'Pending',
             ]);
+
+            if ($request->profile_pic && $request->profile_pic->isValid()) {
+                $filename = time() . '.' . $request->profile_pic->extension();
+                $request->profile_pic->move(public_path("images/$user->role"), $filename);
+                $path = "images/$user->role/$filename";
+                $user->profile_pic = $path;
+            }
 
             $token = $user->createToken('projectToken')->plainTextToken;
             Auth::login($user, true);

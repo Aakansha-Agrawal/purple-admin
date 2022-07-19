@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiProductController extends Controller
 {
@@ -46,7 +47,7 @@ class ApiProductController extends Controller
         try {
             $product = new Product();
             $product->name = $request->input('name');
-            $product->service_provider_id = $request->input('service_provider_id');
+            $product->service_provider_id = Auth::user()->id;
             $product->rent_cost = $request->input('rent_cost');
             $product->stocks = $request->input('stocks');
 
@@ -78,7 +79,7 @@ class ApiProductController extends Controller
 
             foreach ($request->file('images') as $imagefile) {
                 $image = new ProductImage();
-                $path = $imagefile->store('/images/products', ['disk' =>   'my_files']);
+                $path = $imagefile->store('/images/products', ['disk' => 'my_files']);
                 $image->url = $path;
                 $image->product_id = $product->id;
                 $image->save();

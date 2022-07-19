@@ -25,7 +25,6 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::DASHBOARD);
             }
         }
-
         return $next($request);
     }
 }

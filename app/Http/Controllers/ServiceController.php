@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -14,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(5);
+        $services = User::where('role','service')->paginate(5);
         return view('services.index', compact('services'));
     }
 
@@ -82,20 +82,20 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         // dd('in');
-        $service = Service::find($id);
+        $service = User::find($id);
         $service->destroy($id);
         return redirect()->back()->with('success', 'Service Provider Deleted Successfully !');
     }
 
     public function deleted_data()
     {
-        $services = Service::onlyTrashed()->paginate(5);
+        $services = User::onlyTrashed()->paginate(5);
         return view('services.trash', compact('services'));
     }
 
     public function restore($id)
     {
-        $services = Service::onlyTrashed()->find($id)->restore();
+        $services = User::onlyTrashed()->find($id)->restore();
         return redirect()->back()->with('success', 'Service Provider Restored Successfully !');
     }
 }

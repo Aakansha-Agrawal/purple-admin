@@ -12,6 +12,10 @@
                     <div class="bl3"> Admin Login</div>
                     <div class="bl4">Login to your Account</div>
 
+                    <div class="app">
+                        @include('flash-message')
+                    </div>
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
