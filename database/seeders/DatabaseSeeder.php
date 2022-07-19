@@ -19,13 +19,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            AdminSeeder::class
+        ]);
+
         Service::factory(10)->create();
         Renter::factory(10)->create();
         Contact::factory(10)->create();
         Booking::factory(10)->create();
-
-        $this->call([
-            AdminSeeder::class
-        ]);
+        User::factory(2)->create();
     }
 }

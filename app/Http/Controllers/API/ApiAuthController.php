@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
@@ -16,6 +16,7 @@ class ApiAuthController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
+                'phone' => 'required|min:10|max:10',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:8'
             ]);
@@ -27,9 +28,10 @@ class ApiAuthController extends Controller
 
             $user = User::create([
                 'name' => $request->name,
+                'phone' => $request->phone,
                 'email' => $request->email,
                 'role' => 'user',
-                'password' => Hash::make('password'),
+                'password' => Hash::make($request->input('password')),
             ]);
 
             $token = $user->createToken('projectToken')->plainTextToken;
@@ -44,11 +46,15 @@ class ApiAuthController extends Controller
         }
     }
 
-    function logout()
+    function logout(Request $request)
     {
         try {
-            auth()->user()->tokens()->delete();
-            return response()->json(['Logged Out'], 200);
+            if (auth()->user()->tokens()) {
+                auth()->user()->tokens()->delete();
+                return response()->json(['status' => 'true', 'message' => 'Logged Out']);
+            } else {
+                return response()->json(['status' => 'false', 'message' => 'Token Not Found']);
+            }
         } catch (\Exception $e) {
             return response()->json(['status' => 'false', 'message' => $e->getMessage()], 500);
         }
@@ -60,9 +66,14 @@ class ApiAuthController extends Controller
         try {
             $user = User::where([['email', $request->email]])->first();
 
-            if (!$user || !Hash::check($request->password, $user->password)) {
+            if (!$user) {
                 return response([
-                    'message' => ['These credentials do not match our records.']
+                    'message' => ['Email Not Found.']
+                ], 404);
+            }
+            if (!Hash::check($request->password, $user->password)) {
+                return response([
+                    'message' => ['Incorrect Password.']
                 ], 404);
             }
 
@@ -71,6 +82,17 @@ class ApiAuthController extends Controller
             // $user->sendEmailVerificationNotification();
             $success = 'Login Successfull';
             return response(['user' => $user, 'token' => $token, 'message' =>  $success,]);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'false', 'message' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function auth_user()
+    {
+        try {
+            $user = Auth::user();
+            return response()->json(['user' => $user], 200);
         } catch (\Exception $e) {
             return response()->json(['status' => 'false', 'message' => $e->getMessage()], 500);
         }

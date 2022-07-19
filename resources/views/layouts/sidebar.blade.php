@@ -89,18 +89,6 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/reviews">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Reviews </span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Returns </span>
-        </a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesix" aria-expanded="true" aria-controls="collapsesix">
             <i class="fas fa-fw fa-cog"></i>
             <span>Category</span>
@@ -112,6 +100,19 @@
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/reviews">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Reviews </span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Returns </span>
+        </a>
+    </li>
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <!-- Divider -->
 

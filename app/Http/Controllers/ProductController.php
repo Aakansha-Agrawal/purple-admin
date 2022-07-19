@@ -23,7 +23,7 @@ class ProductController extends Controller
 
     public function approve()
     {
-        $products = Product::where('status','accept')->paginate(7);
+        $products = Product::where('status', 'accept')->paginate(7);
         return view('products.approve', compact('products'));
     }
 
@@ -101,7 +101,7 @@ class ProductController extends Controller
 
     public function deleted_data()
     {
-        $products = Product::where('status','reject')->withTrashed()->paginate(6);
+        $products = Product::onlyTrashed()->orWhere('status','reject')->paginate(6);
         return view('products.trash', compact('products'));
     }
 
@@ -119,5 +119,13 @@ class ProductController extends Controller
         $basename = $file_path['basename'];
         $path = $file_path['dirname'];
         return response()->download($file_path_full, $basename, ['Content-Type' => 'application/force-download']);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $product->status = $request->status;
+        $product->save(); 
+        return redirect('/products')->with('success', 'Status change successfully.');
     }
 }

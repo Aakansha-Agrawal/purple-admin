@@ -26,6 +26,10 @@
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
 
+    <!-- for product status -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- for product slider -->
     <style>
         .mySlides {
@@ -56,21 +60,6 @@
         // $(document).ready(function() {
         //     $('#example').DataTable();
         // });
-
-        // function using in products section for delete with reason
-        function myFunction() {
-            let text;
-            if (confirm("Do you want to delete Product")) {
-
-                let person = prompt("Reason", ".....");
-                if (person == null || person == "") {
-                    text = '';
-                } else {
-                    text = person;
-                }
-            }
-            return text;
-        }
 
 
         // for product slider

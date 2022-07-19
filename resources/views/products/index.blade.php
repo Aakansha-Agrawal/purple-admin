@@ -19,7 +19,7 @@
             <div class="app">
                 @include('flash-message')
             </div>
-            <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <table id="products" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th class="bl5">S.No</th>
@@ -42,12 +42,15 @@
                         <td data-label="Product model">{{ $item->model }}</td>
                         <td data-label="Product category">{{ $item->category->cat_name}}</td>
                         <td data-label="status">
-                            <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:green">Accept</button></a>
-                            <a href="#"><button type="button" class="btn btn-secondary ml-1" style="background:red">Reject</button></a>
+                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Accept" data-off="Reject" {{ $item->status === 'Accept' ? 'checked'  : '' }}>
                         </td>
                         <td data-label="Delete Product" class="d-flex justify-content-center">
                             <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a>
-                            <a href="#" onclick="{var $reason = myFunction(); alert($reason) }"><button type="button" class="btn btn-secondary ml-1" style="background:#5600d4">Delete</button></a>
+
+                            <form action="" method="post">
+                                @csrf
+                                <button data-id=" {{ $item->id }}" type="button" class="btn btn-secondary ml-1 btn-submit" style="background:#5600d4">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @php $i++; @endphp
@@ -77,3 +80,39 @@
 <!---------------------- End Content Wrapper -------------->
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(".toggle-class").on('change', function() {
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        alert(status);
+        var product_id = $(this).data('id');
+        alert(product_id);
+    });
+
+
+    // save delete reason
+
+    // function using in products section for delete with reason
+    function myFunction() {
+        let text;
+        // if (confirm("Do you want to delete Product")) {
+
+        //     let person = prompt("Reason", ".....");
+        //     if (person == null || person == "") {
+        //         text = '';
+        //     } else {
+        //         text = person;
+
+        $(".btn-submit").click(function() {
+            var id = $(this).data("id");
+            var token = $("meta[name='csrf-token']").attr("content");
+            console.log("hello");
+
+
+
+        });
+        //     }
+        // }
+    }
+</script>

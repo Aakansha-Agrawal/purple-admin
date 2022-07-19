@@ -23,10 +23,10 @@
                     <tr>
                         <th class="bl5">S No</th>
                         <th class="bl5">Name</th>
-                        <th class="bl5">Service Provider Name</th>
-                        <th class="bl5">Service Provider Email</th>
-                        <th class="bl5">Rent Cost</th>
-                        <th class="bl5">Stocks</th>
+                        <th class="bl5">Brand</th>
+                        <th class="bl5">Model</th>
+                        <th class="bl5">Category</th>
+                        <th class="bl5">Status</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -50,7 +50,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="7"> No Reviews Found!</td>
+                        <td colspan="7"> No Products Found!</td>
                     </tr>
                     @endif
                 </tbody>

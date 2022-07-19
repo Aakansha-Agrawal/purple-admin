@@ -27,7 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('renter',[ApiRenterController::class, 'index']);
-Route::post('renter',[ApiRenterController::class, 'store']);
+Route::post('renter/register ',[ApiRenterController::class, 'store']);
 
 Route::get('services',[ApiServiceController::class, 'index']);
 Route::post('services',[ApiServiceController::class, 'store']);
@@ -40,6 +40,8 @@ Route::post('review',[ApiReviewController::class, 'store']);
 
 Route::get('products',[ApiProductController::class, 'index']);
 Route::post('products',[ApiProductController::class, 'store']);
+Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
+Route::post('products/{id}', [ApiProductController::class, 'update']);
 
 Route::get('bookings',[ApiBookingController::class, 'index']);
 Route::post('bookings',[ApiBookingController::class, 'store']);
@@ -47,7 +49,7 @@ Route::post('bookings',[ApiBookingController::class, 'store']);
 Route::post('login', [ApiAuthController::class, 'login']);
 Route::post('register', [ApiAuthController::class, 'register']);
 Route::post('forgot-password', [ApiForgetPasswordController::class, 'forgotPassword']);
-Route::post('password-reset/{token}', [ApiForgetPasswordController::class, 'sendResetResponse']);
+Route::post('reset-password', [ApiForgetPasswordController::class, 'reset_password']);
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
 

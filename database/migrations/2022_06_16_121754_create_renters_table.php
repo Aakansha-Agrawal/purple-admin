@@ -14,14 +14,17 @@ class CreateRentersTable extends Migration
     public function up()
     {
         Schema::create('renters', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('full_name');
             $table->string('email');
             $table->string('phone');
+            $table->string('role');
+            $table->string('password');
             $table->string('profile_pic')->nullable();
             $table->enum('payment_status', ['Pending' => 'Pending', 'Processed' => 'Processed', 'Received' => 'Received']);
             $table->softDeletes();
             $table->timestamps();
+            $table->rememberToken();
         });
     }
 

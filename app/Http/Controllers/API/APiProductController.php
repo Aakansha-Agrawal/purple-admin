@@ -121,7 +121,56 @@ class ApiProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $product = Product::find($id);
+
+            if ($product) {
+                $product->name = $request->input('name');
+                $product->service_provider_id = $request->input('service_provider_id');
+                $product->rent_cost = $request->input('rent_cost');
+                $product->stocks = $request->input('stocks');
+
+                // ------------ product view content ------------ //
+                $product->model = $request->input('model');
+                $product->brand = $request->input('brand');
+                $product->pickup_address = $request->input('pickup_address');
+                $product->shipping_cost = $request->input('shipping_cost');
+                $product->description = $request->input('description');
+                $product->terms_conditions = $request->input('terms_conditions');
+                $product->per_day_price = $request->input('per_day_price');
+                $product->per_hour_price = $request->input('per_hour_price');
+                $product->two_day_price = $request->input('two_day_price');
+                $product->weekly_price = $request->input('weekly_price');
+                $product->weekend_price = $request->input('weekend_price');
+                $product->package_1 = $request->input('package_1');
+                $product->package_2 = $request->input('package_2');
+                $product->status = $request->input('status');
+                $product->category_id = $request->input('category_id');
+
+                if ($request->manual_pdf && $request->manual_pdf->isValid()) {
+                    $filename = time() . '.' . $request->manual_pdf->extension();
+                    $request->manual_pdf->move(public_path('pdf/products'), $filename);
+                    $path = "pdf/products/$filename";
+                    $product->manual_pdf = $path;
+                }
+
+                $product->update();
+
+                foreach ($request->file('images') as $imagefile) {
+                    $image = new ProductImage();
+                    $path = $imagefile->store('/images/products', ['disk' =>   'my_files']);
+                    $image->url = $path;
+                    $image->product_id = $product->id;
+                    $image->update();
+                }
+
+                return response()->json(['message' => 'Product Updated Succesfully', 'product' => $product, 'status' => 'true']);
+            } else {
+                return response()->json(['message' => 'Product Not Found', 'product' => [], 'status' => 'false']);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'product' => [], 'status' => 'false']);
+        }
     }
 
     /**
@@ -132,6 +181,16 @@ class ApiProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $product = Product::find($id);
+
+            if ($product) {
+                $product->forceDelete($id);
+                return response()->json(['message' => 'Product Deleted Succesfully', 'Status' => 'true']);
+            } else
+                return response()->json(['message' => 'Product Not Found', 'Status' => 'false'], 500);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'Status' => 'false'], 500);
+        }
     }
 }

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::middleware(['auth'])->group( function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/contact', [HomeController::class, 'contact']);
@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/products/trash', [ProductController::class, 'deleted_data']);
     Route::get('/products/approved', [ProductController::class, 'approve']);
     Route::get('/{file}/download', [ProductController::class, 'download']);
+    Route::get('/changeStatus', [ProductController::class, 'changeStatus']);
 
     // --------- services routes ---------- //
     Route::get('/services', [ServiceController::class, 'index']);
@@ -72,4 +73,3 @@ Route::middleware(['auth'])->group( function () {
 });
 
 Auth::routes();
-
