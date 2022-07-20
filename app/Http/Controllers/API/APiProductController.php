@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\PickupAddress;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -20,9 +21,9 @@ class ApiProductController extends Controller
     {
         try {
             $products = Product::all();
-            return response()->json(['products' => $products], 200);
+            return response()->json(['products' => $products, 'status' => 'true']);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'products' => []], 500);
+            return response()->json(['message' => $e->getMessage(), 'products' => [], 'status' => 'false']);
         }
     }
 
@@ -48,24 +49,24 @@ class ApiProductController extends Controller
             $product = new Product();
             $product->name = $request->input('name');
             $product->service_provider_id = Auth::user()->id;
-            $product->rent_cost = $request->input('rent_cost');
-            $product->stocks = $request->input('stocks');
 
             // ------------ product view content ------------ //
             $product->model = $request->input('model');
             $product->brand = $request->input('brand');
-            $product->pickup_address = $request->input('pickup_address');
             $product->shipping_cost = $request->input('shipping_cost');
-            $product->description = $request->input('description');
+            $product->more_info = $request->input('more_info');
             $product->terms_conditions = $request->input('terms_conditions');
-            $product->per_day_price = $request->input('per_day_price');
-            $product->per_hour_price = $request->input('per_hour_price');
+            $product->one_day_price = $request->input('one_day_price');
             $product->two_day_price = $request->input('two_day_price');
+            $product->three_day_price = $request->input('three_day_price');
             $product->weekly_price = $request->input('weekly_price');
             $product->weekend_price = $request->input('weekend_price');
             $product->package_1 = $request->input('package_1');
             $product->package_2 = $request->input('package_2');
-            $product->status = $request->input('status');
+            $product->package_1_price = $request->input('package_1_price');
+            $product->package_2_price = $request->input('package_2_price');
+            $product->inventory = $request->input('inventory');
+            $product->delivery = $request->input('delivery');
             $product->category_id = $request->input('category_id');
 
             if ($request->manual_pdf && $request->manual_pdf->isValid()) {
@@ -77,6 +78,18 @@ class ApiProductController extends Controller
 
             $product->save();
 
+            // code for address on another table
+            $address = new PickupAddress();
+            $address->address = $request->input('address');
+            $address->landmark = $request->input('landmark');
+            $address->country = $request->input('country');
+            $address->state = $request->input('state');
+            $address->city = $request->input('city');
+            $address->postal_code = $request->input('postal_code');
+            $address->product_id = $product->id;
+            $address->save();
+
+            // code for multiple images in product image table
             foreach ($request->file('images') as $imagefile) {
                 $image = new ProductImage();
                 $path = $imagefile->store('/images/products', ['disk' => 'my_files']);
@@ -85,9 +98,9 @@ class ApiProductController extends Controller
                 $image->save();
             }
 
-            return response()->json(['message' => 'Product Added Succesfully', 'product' => $product], 200);
+            return response()->json(['message' => 'Product Added Succesfully', 'product' => $product, 'address' => $address, 'status' => 'true']);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'product' => [],], 500);
+            return response()->json(['message' => $e->getMessage(), 'product' => [], 'status' => 'false']);
         }
     }
 
@@ -127,25 +140,24 @@ class ApiProductController extends Controller
 
             if ($product) {
                 $product->name = $request->input('name');
-                $product->service_provider_id = $request->input('service_provider_id');
-                $product->rent_cost = $request->input('rent_cost');
-                $product->stocks = $request->input('stocks');
 
                 // ------------ product view content ------------ //
                 $product->model = $request->input('model');
                 $product->brand = $request->input('brand');
-                $product->pickup_address = $request->input('pickup_address');
                 $product->shipping_cost = $request->input('shipping_cost');
-                $product->description = $request->input('description');
+                $product->more_info = $request->input('more_info');
                 $product->terms_conditions = $request->input('terms_conditions');
-                $product->per_day_price = $request->input('per_day_price');
-                $product->per_hour_price = $request->input('per_hour_price');
+                $product->one_day_price = $request->input('one_day_price');
                 $product->two_day_price = $request->input('two_day_price');
+                $product->three_day_price = $request->input('three_day_price');
                 $product->weekly_price = $request->input('weekly_price');
                 $product->weekend_price = $request->input('weekend_price');
                 $product->package_1 = $request->input('package_1');
                 $product->package_2 = $request->input('package_2');
-                $product->status = $request->input('status');
+                $product->package_1_price = $request->input('package_1_price');
+                $product->package_2_price = $request->input('package_2_price');
+                $product->inventory = $request->input('inventory');
+                $product->delivery = $request->input('delivery');
                 $product->category_id = $request->input('category_id');
 
                 if ($request->manual_pdf && $request->manual_pdf->isValid()) {
@@ -157,6 +169,17 @@ class ApiProductController extends Controller
 
                 $product->update();
 
+                // code for address on another table
+                $address = new PickupAddress();
+                $address->address = $request->input('address');
+                $address->landmark = $request->input('landmark');
+                $address->country = $request->input('country');
+                $address->state = $request->input('state');
+                $address->city = $request->input('city');
+                $address->postal_code = $request->input('postal_code');
+                $address->product_id = $product->id;
+                $address->save();
+
                 foreach ($request->file('images') as $imagefile) {
                     $image = new ProductImage();
                     $path = $imagefile->store('/images/products', ['disk' =>   'my_files']);
@@ -165,7 +188,7 @@ class ApiProductController extends Controller
                     $image->update();
                 }
 
-                return response()->json(['message' => 'Product Updated Succesfully', 'product' => $product, 'status' => 'true']);
+                return response()->json(['message' => 'Product Updated Succesfully', 'product' => $product, 'address' => $address, 'status' => 'true']);
             } else {
                 return response()->json(['message' => 'Product Not Found', 'product' => [], 'status' => 'false']);
             }
@@ -189,9 +212,9 @@ class ApiProductController extends Controller
                 $product->forceDelete($id);
                 return response()->json(['message' => 'Product Deleted Succesfully', 'Status' => 'true']);
             } else
-                return response()->json(['message' => 'Product Not Found', 'Status' => 'false'], 500);
+                return response()->json(['message' => 'Product Not Found', 'Status' => 'false', 'status' => 'false']);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'Status' => 'false'], 500);
+            return response()->json(['message' => $e->getMessage(), 'Status' => 'false', 'status' => 'false']);
         }
     }
 }

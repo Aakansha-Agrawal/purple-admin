@@ -21,12 +21,6 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    public function approve()
-    {
-        $products = Product::where('status', 'accept')->paginate(7);
-        return view('products.approve', compact('products'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -119,13 +113,5 @@ class ProductController extends Controller
         $basename = $file_path['basename'];
         $path = $file_path['dirname'];
         return response()->download($file_path_full, $basename, ['Content-Type' => 'application/force-download']);
-    }
-
-    public function changeStatus(Request $request)
-    {
-        $product = Product::find($request->product_id);
-        $product->status = $request->status;
-        $product->save(); 
-        return redirect('/products')->with('success', 'Status change successfully.');
     }
 }

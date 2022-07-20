@@ -18,6 +18,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+
+                    <!-- <img src="{{ asset('assets/img/placeholder.png') }}" class="mySlides" alt="product" width="100%" height="400px" /> -->
+
+                    @if($product->product_images)
                     <div class="w3-content w3-display-container">
 
                         @foreach($product->product_images as $image)
@@ -27,6 +31,7 @@
                         <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                         <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                     </div>
+                    @endif
                 </div>
                 <div class="col-md-5">
                     <div class="mb-3">

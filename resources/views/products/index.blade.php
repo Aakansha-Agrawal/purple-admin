@@ -27,7 +27,6 @@
                         <th class="bl5">Brand</th>
                         <th class="bl5">Model</th>
                         <th class="bl5">Category</th>
-                        <th class="bl5">Status</th>
                         <th class="bl5">Block</th>
                     </tr>
                 </thead>
@@ -41,9 +40,6 @@
                         <td data-label="Product brand">{{ $item->brand }}</td>
                         <td data-label="Product model">{{ $item->model }}</td>
                         <td data-label="Product category">{{ $item->category->cat_name}}</td>
-                        <td data-label="status">
-                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Accept" data-off="Reject" {{ $item->status === 'Accept' ? 'checked'  : '' }}>
-                        </td>
                         <td data-label="Delete Product" class="d-flex justify-content-center">
                             <a href="/products/{{ $item->id }}/view"><button type="button" class="btn btn-secondary" style="background:#5600d4">View</button></a>
 
@@ -80,39 +76,3 @@
 <!---------------------- End Content Wrapper -------------->
 
 @endsection
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(".toggle-class").on('change', function() {
-        var status = $(this).prop('checked') == true ? 1 : 0;
-        alert(status);
-        var product_id = $(this).data('id');
-        alert(product_id);
-    });
-
-
-    // save delete reason
-
-    // function using in products section for delete with reason
-    function myFunction() {
-        let text;
-        // if (confirm("Do you want to delete Product")) {
-
-        //     let person = prompt("Reason", ".....");
-        //     if (person == null || person == "") {
-        //         text = '';
-        //     } else {
-        //         text = person;
-
-        $(".btn-submit").click(function() {
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            console.log("hello");
-
-
-
-        });
-        //     }
-        // }
-    }
-</script>

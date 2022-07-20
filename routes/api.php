@@ -52,6 +52,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     // storing using token for service provider id
 
     Route::post('products', [ApiProductController::class, 'store']);
+    // Route::post('products/{id}', [ApiProductController::class, 'update']);
 
     // storing using token for renter id
     Route::post('review', [ApiReviewController::class, 'store']);

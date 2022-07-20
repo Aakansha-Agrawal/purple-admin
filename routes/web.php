@@ -40,9 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
     Route::get('/products/{id}/restore', [ProductController::class, 'restore']);
     Route::get('/products/trash', [ProductController::class, 'deleted_data']);
-    Route::get('/products/approved', [ProductController::class, 'approve']);
     Route::get('/{file}/download', [ProductController::class, 'download']);
-    Route::get('/changeStatus', [ProductController::class, 'changeStatus']);
 
     // --------- services routes ---------- //
     Route::get('/services', [ServiceController::class, 'index']);
