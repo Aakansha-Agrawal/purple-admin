@@ -28,8 +28,6 @@ class UserFactory extends Factory
             'phone' => '8677676560',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'payment_status'=>'Processed',
-            'price'=>'777',
             'role'=>'renter',
             'profile_pic' => 'images/services/1655384311.png',
         ];

@@ -32,8 +32,6 @@ class ApiAuthController extends Controller
                 'email' => $request->email,
                 'role' => $request->role,
                 'password' => Hash::make($request->input('password')),
-                'price' => $request->input('price'),
-                'payment_status' => $request->input('payment_status') ?? 'Pending',
             ]);
 
             if ($request->profile_pic && $request->profile_pic->isValid()) {

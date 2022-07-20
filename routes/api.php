@@ -38,8 +38,8 @@ Route::get('products', [ApiProductController::class, 'index']);
 Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
 Route::post('products/{id}', [ApiProductController::class, 'update']);
 
-Route::get('bookings', [ApiBookingController::class, 'index']);
-Route::post('bookings', [ApiBookingController::class, 'store']);
+// Route::get('bookings', [ApiBookingController::class, 'index']);
+// Route::post('bookings', [ApiBookingController::class, 'store']);
 
 Route::get('auth_user', [ApiAuthController::class, 'auth_user']);
 Route::post('login', [ApiAuthController::class, 'login']);
