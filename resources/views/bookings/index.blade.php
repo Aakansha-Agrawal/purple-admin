@@ -37,9 +37,9 @@
                     @foreach($bookings as $book)
                     <tr>
                         <td data-label="SNo">{{ $i }}</td>
-                        <td data-label="End User Name">{{ $book->renter->full_name }}</td>
+                        <td data-label="End User Name">{{ $book->renter->name }}</td>
                         <td data-label="End User Email">{{ $book->renter->email }}</td>
-                        <td data-label="Service Provider Name">{{ $book->service->full_name }}</td>
+                        <td data-label="Service Provider Name">{{ $book->service->name }}</td>
                         <td data-label="Service Provider Name">{{ $book->service->email }}</td>
                         <td data-label="Equipment Name">
                             <button type="button" style="background:#5600d4" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-md">View</button>

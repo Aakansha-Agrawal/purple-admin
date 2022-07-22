@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -20,7 +21,7 @@ class BookingController extends Controller
 
     public function closed()
     {
-        $bookings = Booking::paginate(5);
+        $bookings = Booking::onlyTrashed()->orwhere('status', 'closed')->paginate(5);
         return view('bookings.closed', compact('bookings'));
     }
 
@@ -89,7 +90,24 @@ class BookingController extends Controller
     public function destroy($id)
     {
         $booking = Booking::find($id);
+        $booking->status = 'closed';
+        $booking->update();
         $booking->destroy($id);
         return redirect()->back()->with('success', 'Booking Deleted Successfully !');
+    }
+
+    public function force_delete($id)
+    {
+        try {
+            $product = Product::find($id);
+
+            if ($product) {
+                $product->forceDelete($id);
+                return response()->json(['message' => 'Product Deleted Succesfully', 'Status' => 'true']);
+            } else
+                return response()->json(['message' => 'Product Not Found', 'Status' => 'false', 'status' => 'false']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'Status' => 'false', 'status' => 'false']);
+        }
     }
 }

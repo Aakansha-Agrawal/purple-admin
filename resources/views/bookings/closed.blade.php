@@ -26,8 +26,6 @@
                         <th class="bl5" width="10%">End User Name</th>
                         <th class="bl5" width="10%">Service Provider Name</th>
                         <th class="bl5" width="10%">Equipment Details</th>
-                        <th class="bl5" width="10%">Return Date</th>
-                        <th class="bl5" width="10%">Service provider Status</th>
                         <th class="bl5" width="10%">Delete</th>
                     </tr>
                 </thead>
@@ -37,8 +35,8 @@
                     @foreach($bookings as $book)
                     <tr>
                         <td data-label="SNo">{{ $i }}</td>
-                        <td data-label="End User Name">{{ $book->renter->full_name }}</td>
-                        <td data-label="Service Provider Name">{{ $book->service->full_name }}</td>
+                        <td data-label="End User Name">{{ $book->renter->name }}</td>
+                        <td data-label="Service Provider Name">{{ $book->service->name }}</td>
                         <td data-label="Equipment Name">
                             <button type="button" style="background:#5600d4" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-md">View</button>
                             <!-- Button trigger modal -->
@@ -55,8 +53,7 @@
                                         </div>
                                         <div class="row modal-body">
                                             <div class="col-md-5">
-                                                <h5 class="text-dark">Equipment Name :</h5>
-                                                <h5 class="text-dark">Package Taken :</h5>
+                                                <h5 class="text-dark">Product Name :</h5>
                                                 <h5 class="text-dark">Quantity :</h5>
                                                 <h5 class="text-dark">Delivery Type :</h5>
                                                 <h5 class="text-dark">Total Price :</h5>
@@ -65,7 +62,7 @@
                                                 <h5 class="text-dark">Expiry Date :</h5>
                                             </div>
                                             <div class="col-md-6">
-                                                <h5>{{ $book->equipment_name }}</h5>
+                                                <h5>{{ $book->product->name }}</h5>
                                                 <h5>{{ $book->package_taken }}</h5>
                                                 <h5>{{ $book->quantity }}</h5>
                                                 <h5>{{ $book->delivery_type }}</h5>
@@ -82,25 +79,15 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-label="Return Date">{{ $book->return_date }}</td>
-                        <td data-label="Status">
-                            <div class="input-group mb-3">
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option {{ $book->service->status == 'Pending' ? 'selected':'' }}>Pending</option>
-                                    <option {{ $book->service->status == 'Processed' ? 'selected':'' }}>Processed</option>
-                                    <option {{ $book->service->status == 'Received' ? 'selected':'' }}>Received</option>
-                                </select>
-                            </div>
-                        </td>
                         <td data-label="Block" class="d-flex justify-content-center">
-                            <a href="/bookings/{{ $book->id }}/delete" onclick="return confirm('Do you want to Delete the Booking?');"><button type="button" class="btn btn-secondary " style="background:#5600d4">Delete</button>
+                            <a href="/bookings/{{ $book->id }}/force_delete" onclick="return confirm('Do you want to Delete the Booking?');"><button type="button" class="btn btn-secondary " style="background:#5600d4">Delete</button>
                         </td>
                     </tr>
                     @php $i++; @endphp
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="8"> No Bookings Found!</td>
+                        <td colspan="5"> No Bookings Found!</td>
                     </tr>
                     @endif
                 </tbody>

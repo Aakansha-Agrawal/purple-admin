@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/closed', [BookingController::class, 'closed']);
     Route::get('/bookings/{id}/view', [BookingController::class, 'show']);
     Route::get('/bookings/{id}/delete', [BookingController::class, 'destroy']);
+    Route::get('/bookings/{id}/force_delete', [BookingController::class, 'force_delete']);
 
     // -------- Category routes ----------- //
     Route::get('/category', [CategoryController::class, 'index']);

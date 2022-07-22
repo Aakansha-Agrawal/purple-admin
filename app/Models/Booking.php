@@ -14,11 +14,16 @@ class Booking extends Model
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'service_provider_id');
+        return $this->belongsTo(User::class, 'service_provider_id');
     }
 
     public function renter()
     {
-        return $this->belongsTo(Renter::class, 'renter_id');
+        return $this->belongsTo(User::class, 'renter_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

@@ -38,8 +38,8 @@ Route::get('products', [ApiProductController::class, 'index']);
 Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
 Route::post('products/{id}', [ApiProductController::class, 'update']);
 
-// Route::get('bookings', [ApiBookingController::class, 'index']);
-// Route::post('bookings', [ApiBookingController::class, 'store']);
+Route::get('bookings', [ApiBookingController::class, 'index']);
+Route::post('bookings/{id}', [ApiBookingController::class, 'update']);
 
 Route::get('auth_user', [ApiAuthController::class, 'auth_user']);
 Route::post('login', [ApiAuthController::class, 'login']);
@@ -49,10 +49,11 @@ Route::post('reset-password', [ApiForgetPasswordController::class, 'reset_passwo
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
 
-    // storing using token for service provider id
+    // storing using token for end user
+    Route::post('bookings', [ApiBookingController::class, 'store']);
 
+    // storing using token for service provider id
     Route::post('products', [ApiProductController::class, 'store']);
-    // Route::post('products/{id}', [ApiProductController::class, 'update']);
 
     // storing using token for renter id
     Route::post('review', [ApiReviewController::class, 'store']);

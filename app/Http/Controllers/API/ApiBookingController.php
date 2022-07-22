@@ -4,7 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiBookingController extends Controller
 {
@@ -15,12 +18,11 @@ class ApiBookingController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $bookings = Booking::all();
-            return response()->json(['bookings'=>$bookings], 200);
-        }
-        catch(\Exception $e){
-            return response()->json(['message'=>$e->getMessage(),'bookings'=>[]], 500);
+            return response()->json(['bookings' => $bookings], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'bookings' => []], 500);
         }
     }
 
@@ -42,21 +44,41 @@ class ApiBookingController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $booking = new Booking();
-            $booking->renter_id = $request->input('renter_id');
+
+            $validator = Validator::make($request->all(), [
+                'service_provider_id' => 'required',
+                'product_id' => 'required',
+                'package' => 'required',
+                'delivery_type' => 'required',
+                'purchase_date' => 'required',
+                'expiry_date' => 'required',
+                'total_price' => 'required',
+                'quantity' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors()->all()[0];
+                return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
+            }
+
+            $booking->renter_id = Auth::user()->id;
             $booking->service_provider_id = $request->input('service_provider_id');
-            $booking->equipment_name = $request->input('equipment_name');
+            $booking->product_id = $request->input('product_id');
+            $booking->package = $request->input('package');
+            $booking->quantity = $request->input('quantity');
+            $booking->delivery_type = $request->input('delivery_type');
             $booking->purchase_date = $request->input('purchase_date');
             $booking->expiry_date = $request->input('expiry_date');
-            $booking->price_type = $request->input('price_type');
+            $booking->return_date = $request->input('return_date');
             $booking->total_price = $request->input('total_price');
+            $booking->status = 'active';
 
             $booking->save();
-            return response()->json(['message'=>'Booking Added Succesfully','booking'=>$booking], 200);
-        }
-        catch(\Exception $e){
-            return response()->json(['message'=>$e->getMessage(),'booking'=>[]], 500);
+            return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);
         }
     }
 
@@ -91,7 +113,15 @@ class ApiBookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $booking = Booking::find($id);
+            $booking->status = $request->input('status');
+            $booking->return_date = $request->input('return_date');
+            $booking->update();
+            return response()->json(['message' => 'Status Updated Successfully !', 'status' => 'true', 'booking' => $booking]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e, 'status' => 'false']);
+        }
     }
 
     /**

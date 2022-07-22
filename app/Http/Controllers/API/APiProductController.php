@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiProductController extends Controller
 {
@@ -47,6 +48,43 @@ class ApiProductController extends Controller
     {
         try {
             $product = new Product();
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'service_provider_id' => 'required',
+                'model' => 'required',
+                'brand' => 'required',
+                'shipping_cost' => 'required',
+                'more_info' => 'required',
+                'terms_conditions' => 'required',
+                'one_day_price' => 'required',
+                'two_day_price' => 'required',
+                'three_day_price' => 'required',
+                'weekly_price' => 'required',
+                'weekend_price' => 'required',
+                'package_1' => 'required',
+                'package_2' => 'required',                
+                'package_1_price' => 'required',
+                'package_2_price' => 'required',
+                'inventory' => 'required',
+                'delivery' => 'required',
+                'category_id' => 'required',
+                'manual_pdf' => 'required',
+                'category_id' => 'required',
+
+                'address' => 'required',
+                'landmark' => 'required',
+                'country' => 'required',
+                'state' => 'required',
+                'city' => 'required',
+                'postal_code' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors()->all()[0];
+                return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
+            }
+
             $product->name = $request->input('name');
             $product->service_provider_id = Auth::user()->id;
 
