@@ -34,13 +34,4 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
-    }
-
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return response()->json([
-            "status" => false,
-            "message"=> 'User not Found or Token is Incorrect',
-        ]);
-    }
-}
+    }}

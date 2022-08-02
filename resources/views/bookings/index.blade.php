@@ -45,7 +45,7 @@
                             <button type="button" style="background:#5600d4" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-md">View</button>
                             <!-- Button trigger modal -->
 
-                            <!-- Modal -->
+                            <!-- Modal for view details -->
                             <div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
@@ -67,8 +67,8 @@
                                                 <h5 class="text-dark">Expiry Date :</h5>
                                             </div>
                                             <div class="col-md-6">
-                                                <h5>{{ $book->equipment_name }}</h5>
-                                                <h5>{{ $book->package_taken }}</h5>
+                                                <h5>{{ $book->product->name }}</h5>
+                                                <h5>{{ $book->package }}</h5>
                                                 <h5>{{ $book->quantity }}</h5>
                                                 <h5>{{ $book->delivery_type }}</h5>
                                                 <h5>{{ $book->total_price }}</h5>

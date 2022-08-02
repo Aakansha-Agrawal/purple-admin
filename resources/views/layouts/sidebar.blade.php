@@ -58,6 +58,18 @@
         </div>
     </li>
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesix" aria-expanded="true" aria-controls="collapsesix">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Category</span>
+        </a>
+        <div id="collapsesix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/category/add">Add Category</a>
+                <a class="collapse-item" href="/category">All Category</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cog"></i>
             <span>Products</span>
@@ -86,18 +98,6 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Contact Form </span>
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesix" aria-expanded="true" aria-controls="collapsesix">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Category</span>
-        </a>
-        <div id="collapsesix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/category/add">Add Category</a>
-                <a class="collapse-item" href="/category">All Category</a>
-            </div>
-        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/reviews">

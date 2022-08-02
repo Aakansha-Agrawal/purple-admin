@@ -32,7 +32,7 @@
                     @else
                     <img src="{{ asset('assets/img/placeholder.png') }}" class="mySlides" alt="product" width="100%" height="400px" />
                     @endif
-                    
+
                 </div>
                 <div class="col-md-5">
                     <div class="mb-3">
@@ -42,9 +42,9 @@
 
                         <div class="d-flex mt-3">
                             <div class="mr-4">
-                                <h5>Per Day Price - {{ $product->per_day_price }}</h5>
-                                <h5>Per Hour Price - {{ $product->per_hour_price }}</h5>
-                                <h5>Two Day Price - {{ $product->two_day_price }}</h5>
+                                <h5>One Day Price - {{ $product->one_day_price }}</h5>
+                                <h5>Two Days Price - {{ $product->two_day_price }}</h5>
+                                <h5>Three Days Price - {{ $product->three_day_price }}</h5>
                             </div>
                             <div class="ml-4">
                                 <h5>Weekly Price - {{ $product->weekly_price }}</h5>
@@ -53,28 +53,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <h5 class="text-dark"><b>Description -</b></h5>
-                        <p>{{ $product->description }}</p>
-                    </div>
+
                     <div>
                         <a href="{{ url('') }}/{{$product->manual_pdf}}" target="_blank">
                             <b>
                                 <h5><i class="fa fa-download mr-1" aria-hidden="true"></i>Download</h5>
                             </b>
                         </a>
-                        <div class="mt-3">
-                            Package 1 - {{ $product->package_1 }}
-                        </div>
-                        <div>
-                            Package 2 - {{ $product->package_2 }}
-                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Package</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>{{ $product->package_1 }}</td>
+                                    <td>{{ $product->package_1_price }}</td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td>{{ $product->package_2 }}</td>
+                                    <td>{{ $product->package_2_price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="mt-3">
                 <h4 class="text-dark"><b>Terms & Conditions</b></h4>
                 <p>{{ $product->terms_conditions }}</p>
+            </div>
+            <div class="mb-3">
+                <h5 class="text-dark"><b>Description -</b></h5>
+                <p>{{ $product->more_info }}</p>
             </div>
         </div>
         <!-------------- End Product Page Content --------------->
