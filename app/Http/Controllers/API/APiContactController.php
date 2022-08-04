@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiContactController extends Controller
 {
@@ -44,11 +45,8 @@ class ApiContactController extends Controller
     {
         try{
             $contact = new Contact();
-            $contact->name = $request->input('name');
-            $contact->email = $request->input('email');
-            $contact->phone = $request->input('phone');
+            $contact->user_id = Auth::user()->id;
             $contact->message = $request->input('message');
-
             $contact->save();
             return response()->json(['message'=>'Contact Added Succesfully','contact'=>$contact], 200);
         }
@@ -99,6 +97,8 @@ class ApiContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $contact = Contact::find($id);
+        $contact->destroy($id);
+        return redirect('/contact')->with('success','Data Deleted Successfully');
     }
 }

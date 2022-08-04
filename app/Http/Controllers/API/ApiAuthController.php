@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class ApiAuthController extends Controller
@@ -69,7 +70,6 @@ class ApiAuthController extends Controller
 
     function login(Request $request)
     {
-
         try {
             $user = User::where([['email', $request->email]])->first();
 
@@ -94,6 +94,31 @@ class ApiAuthController extends Controller
         }
     }
 
+    function get_user(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+            ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors()->all()[0];
+                return response()->json(['status' => 'false', 'message' => $error], 422);
+            }
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user) {
+                return response([
+                    'message' => 'Email Not Found.',
+                    'status' => 'false'
+                ], 404);
+            }
+
+            return response()->json(['status' => 'true', 'user' => $user]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e, 'status' => 'false']);
+        }
+    }
 
     public function auth_user()
     {

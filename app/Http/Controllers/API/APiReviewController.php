@@ -4,8 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Review;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ApiReviewController extends Controller
 {
@@ -17,8 +20,19 @@ class ApiReviewController extends Controller
     public function index()
     {
         try {
-            $review = Review::all();
-            return response()->json(['review' => $review], 200);
+            $reviews = Review::all();
+            $foo = array();
+
+            // for merging category table into duty table and getting boat from duty table
+            // nested relation table data
+            foreach ($reviews as $review) {
+                $foo = [
+                    'service_provider' => $review->service_provider,
+                    'end_user' => $review->end_user,
+                ];
+            }
+            
+            return response()->json(['review' => $reviews], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'review' => []], 500);
         }
@@ -46,7 +60,6 @@ class ApiReviewController extends Controller
             $review = new Review();
             $review->service_provider_id = $request->input('service_provider_id');
             $review->renter_id = Auth::user()->id;
-            $review->product_id = $request->input('product_id');
             $review->rating = $request->input('rating');
             $review->review = $request->input('review');
 
@@ -100,5 +113,37 @@ class ApiReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // get review data for service provider
+    function get_review(Request $request)
+    {
+        try {
+            $reviews = Review::where('service_provider_id', Auth::user()->id)->get();
+
+            // dd(Auth::user()->id, Auth::user()->email);
+
+            if (!$reviews) {
+                return response([
+                    'message' => 'No Data Found.',
+                    'status' => 'false'
+                ], 404);
+            }
+
+            $foo = array();
+
+            // for merging category table into duty table and getting boat from duty table
+            // nested relation table data
+            foreach ($reviews as $review) {
+                $foo = [
+                    'service_provider' => $review->service_provider,
+                    'end_user' => $review->end_user,
+                ];
+            }
+
+            return response()->json(['status' => 'true', 'reviews' => $reviews]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e, 'status' => 'false']);
+        }
     }
 }

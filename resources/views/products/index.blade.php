@@ -53,7 +53,7 @@
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="7"> No Reviews Found!</td>
+                        <td colspan="7"> No Records Found!</td>
                     </tr>
                     @endif
                 </tbody>

@@ -12,17 +12,12 @@ class Review extends Model
 
     protected $fillable = ['renter_id', 'service_provider_id', 'product_id', 'rating', 'review'];
 
-    public function service()
+    public function service_provider()
     {
         return $this->belongsTo(User::class, 'service_provider_id');
     }
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    public function renter()
+    public function end_user()
     {
         return $this->belongsTo(User::class, 'renter_id');
     }

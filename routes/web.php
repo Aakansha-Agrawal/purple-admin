@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\API\ApiContactController;
+use App\Http\Controllers\API\ApiPaymentController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChangePasswordController;
@@ -30,9 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/contact', [HomeController::class, 'contact']);
     Route::get('/reviews', [HomeController::class, 'review']);
-    Route::get('/payments/end-user', [HomeController::class, 'payment_renter']);
-    Route::get('/payments/provider', [HomeController::class, 'payment_provider']);
     Route::get('/viewdetails', [HomeController::class, 'viewdetails']);
+
+    // payment routes
+    Route::get('/payments/end-user', [ApiPaymentController::class, 'payment_renter']);
+    Route::get('/payments/provider', [ApiPaymentController::class, 'payment_provider']);
 
     // --------- products routes ---------- //
     Route::get('/products', [ProductController::class, 'index']);
@@ -69,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/change-password/{id}', [ChangePasswordController::class, 'change_password']);
     Route::post('/update-password/{id}', [ChangePasswordController::class, 'update_password']);
+
+    Route::get('contact/{id}/delete', [ApiContactController::class, 'destroy']);
 });
 
 Auth::routes();

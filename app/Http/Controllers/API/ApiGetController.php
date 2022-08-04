@@ -11,7 +11,7 @@ class ApiGetController extends Controller
     public function renter()
     {
         try {
-            $renter = User::where('role','renter')->all();
+            $renter = User::where('role','renter')->get();
             return response()->json(['end_user' => $renter, 'status' => 'true']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'end_user' => [], 'status' => 'false']);
@@ -21,7 +21,7 @@ class ApiGetController extends Controller
     public function service()
     {
         try {
-            $service = User::where('role','service')->all();
+            $service = User::where('role','service')->get();
             return response()->json(['service_provider' => $service, 'status' => 'true']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'service_provider' => [], 'status' => 'false']);

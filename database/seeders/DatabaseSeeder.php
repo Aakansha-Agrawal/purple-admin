@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class
         ]);
 
-        Contact::factory(10)->create();
+        // Contact::factory(10)->create();
         // Booking::factory(10)->create();
-        User::factory(2)->create();
+        // User::factory(2)->create();
     }
 }

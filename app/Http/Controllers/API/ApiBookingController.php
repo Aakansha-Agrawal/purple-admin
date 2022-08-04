@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Payment;
+use App\Models\PickupAddress;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +78,55 @@ class ApiBookingController extends Controller
             $booking->status = 'active';
 
             $booking->save();
+
+            // booking k sath payment store
+            $payment = new Payment();
+            $payment->booking_id = $booking->id;
+            $payment->renter_id = $booking->renter_id;
+            $payment->service_provider_id = $booking->service_provider_id;
+            $payment->product_id = $booking->product_id;
+            $payment->total_amount = $booking->total_price;
+
+            // to get 2% for admin
+            $price = ($payment->total_amount * 2) / 100;
+            $payment->admin_amount = $price;
+
+            // remaining amount
+            $payment->service_provider_amount = $payment->total_amount - $payment->admin_amount;
+
+            $payment->payment_mode = 'online';
+            $payment->end_user_status = 'pending';
+            $payment->service_provider_status = 'pending';
+            $payment->save();
+
+            $validator = Validator::make($request->all(), [
+                'address' => 'required',
+                'landmark' => 'nullable',
+                'country' => 'required',
+                'state' => 'required',
+                'city' => 'required',
+                'postal_code' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                $error = $validator->errors()->all()[0];
+                return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
+            }
+
+            if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
+                // for saving address in address table
+                // code for address on another table
+                $address = new PickupAddress();
+                $address->address = $request->input('address');
+                $address->landmark = $request->input('landmark');
+                $address->country = $request->input('country');
+                $address->state = $request->input('state');
+                $address->city = $request->input('city');
+                $address->postal_code = $request->input('postal_code');
+                $address->booking_id = $booking->id;
+                $address->save();
+            }
+
             return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);

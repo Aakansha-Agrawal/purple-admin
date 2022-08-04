@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\PickupAddress;
 use App\Models\Product;
@@ -22,6 +23,18 @@ class ApiProductController extends Controller
     {
         try {
             $products = Product::all();
+
+            $foo = array();
+
+            // for merging category table into duty table and getting boat from duty table
+            // nested relation table data
+            foreach ($products as $product) {
+                $foo = [
+                    'product_images' => $product->product_images,                    
+                    'pickup_address' => $product->pickup_address,
+                ];
+            }
+
             return response()->json(['products' => $products, 'status' => 'true']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'products' => [], 'status' => 'false']);
@@ -63,7 +76,7 @@ class ApiProductController extends Controller
                 'weekly_price' => 'required',
                 'weekend_price' => 'required',
                 'package_1' => 'required',
-                'package_2' => 'required',                
+                'package_2' => 'required',
                 'package_1_price' => 'required',
                 'package_2_price' => 'required',
                 'inventory' => 'required',
@@ -253,6 +266,33 @@ class ApiProductController extends Controller
                 return response()->json(['message' => 'Product Not Found', 'Status' => 'false', 'status' => 'false']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'Status' => 'false', 'status' => 'false']);
+        }
+    }
+
+
+    // to get product based on category
+    public function get_products()
+    {
+        try {
+            $category = Category::all();
+
+            if ($category->count() == 0) {
+                return response()->json(['message' => "No Records Found", 'category' => []], 500);
+            }
+
+            $foo = array();
+
+            // for merging category table into duty table and getting boat from duty table
+            // nested relation table data
+            foreach ($category as $cat) {
+                $foo = [
+                    'products' => $cat->product,
+                ];
+            }
+
+            return response()->json(['category' => $category, 'status' => 'true'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'category' => [], 'status' => 'false'], 500);
         }
     }
 }

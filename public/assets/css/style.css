@@ -185,6 +185,7 @@ table th,
 table td {
   padding: .625em;
   text-align: center;
+  word-wrap: break-word;
 }
 
 table th {

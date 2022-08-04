@@ -15,13 +15,14 @@ class CreatePickupAddressesTable extends Migration
     {
         Schema::create('pickup_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('address');
-            $table->string('landmark');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->integer('product_id');
+            $table->string('address')->nullable();
+            $table->string('landmark')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->integer('product_id')->nullable();
+            $table->integer('booking_id')->nullable();
             $table->timestamps();
         });
     }

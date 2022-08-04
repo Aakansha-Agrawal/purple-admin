@@ -22,10 +22,6 @@ class HomeController extends Controller
         return view('reviews', compact('reviews'));
     }
 
-    public function payment_renter(){
-        return view('payment');
-    }
-
     public function payment_provider(){
         return view('payment1');
     }

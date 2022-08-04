@@ -17,7 +17,6 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->integer('renter_id')->unsigned();
             $table->integer('service_provider_id')->unsigned();
-            $table->integer('product_id')->unsigned();
             $table->string('rating');
             $table->string('review');
 
