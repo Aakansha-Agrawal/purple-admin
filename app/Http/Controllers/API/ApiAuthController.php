@@ -84,6 +84,12 @@ class ApiAuthController extends Controller
                 ], 404);
             }
 
+            if(!($request->role == $user->role)){
+                return response([
+                    'message' => ['Incorrect Role.']
+                ], 404);
+            }
+
             $token = $user->createToken('projectToken')->plainTextToken;
             Auth::login($user, true);
             // $user->sendEmailVerificationNotification();

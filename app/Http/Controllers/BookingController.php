@@ -15,8 +15,13 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::paginate(5);
-        return view('bookings.index', compact('bookings'));
+        try{
+            $bookings = Booking::paginate(5);
+            return view('bookings.index', compact('bookings'));
+        }
+        catch(\Exception $e){
+            return view('notfound');
+        }
     }
 
     public function closed()

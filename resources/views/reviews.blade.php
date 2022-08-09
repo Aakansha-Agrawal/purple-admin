@@ -34,11 +34,11 @@
                     @php $i=1; @endphp
                     @foreach($reviews as $item)
                     <tr>
-                        <td data-label="End User Name">{{ $i }}</td>
+                        <td data-label="id">{{ $i }}</td>
                         <td data-label="End User Name">{{ $item->renter->name }}</td>
                         <td data-label="End User Email">{{ $item->renter->email }}</td>
-                        <td data-label="Service Provider Name">{{ $item->service->name }}</td>
-                        <td data-label="Service Provider Email">{{ $item->service->email }}</td>
+                        <td data-label="Service Provider Name">{{ $item->service_provider->name }}</td>
+                        <td data-label="Service Provider Email">{{ $item->service_provider->email }}</td>
                         <td data-label="Ratings">{{ $item->rating }}</td>
                         <td data-label="Review">{{ $item->review }}</td>
                         <td><a href="/review/{{ $item->id }}/delete" onclick="return confirm('Do you want to Delete the Reviews?');"><button type="button" class="btn btn-secondary" style="background:#5600d4">Delete</button></a></td>

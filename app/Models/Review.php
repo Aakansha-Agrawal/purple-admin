@@ -17,7 +17,7 @@ class Review extends Model
         return $this->belongsTo(User::class, 'service_provider_id');
     }
 
-    public function end_user()
+    public function renter()
     {
         return $this->belongsTo(User::class, 'renter_id');
     }

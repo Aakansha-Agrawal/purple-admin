@@ -64,7 +64,6 @@ class ApiProductController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
-                'service_provider_id' => 'required',
                 'model' => 'required',
                 'brand' => 'required',
                 'shipping_cost' => 'required',
