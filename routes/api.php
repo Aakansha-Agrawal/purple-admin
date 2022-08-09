@@ -9,6 +9,7 @@ use App\Http\Controllers\API\ApiPaymentController;
 use App\Http\Controllers\API\ApiProductController;
 use App\Http\Controllers\API\ApiReviewController;
 use App\Http\Controllers\API\ApiSearchController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::get('products', [ApiProductController::class, 'index']);
 Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
 Route::post('products/{id}', [ApiProductController::class, 'update']);
 Route::get('category/products', [ApiProductController::class, 'get_products']);
+Route::post('user_products', [ApiProductController::class, 'get_user_products']);
 
 Route::get('bookings', [ApiBookingController::class, 'index']);
 Route::post('bookings/{id}', [ApiBookingController::class, 'update']);
@@ -55,6 +57,8 @@ Route::post('reset-password', [ApiForgetPasswordController::class, 'reset_passwo
 Route::post('get_user', [ApiAuthController::class, 'get_user']);
 Route::get('search/{name}', [ApiSearchController::class, 'filter']);
 
+Route::get('/banners', [BannerController::class, 'api_index']);
+
 Route::middleware('auth:sanctum', 'verified')->group(function () {
 
     // storing using token for end user
@@ -69,5 +73,4 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
 
     Route::post('logout', [ApiAuthController::class, 'logout']);
     Route::post('contact', [ApiContactController::class, 'store']);
-
 });

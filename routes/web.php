@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApiContactController;
 use App\Http\Controllers\API\ApiPaymentController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChangePasswordController;
@@ -73,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/change-password/{id}', [ChangePasswordController::class, 'change_password']);
     Route::post('/update-password/{id}', [ChangePasswordController::class, 'update_password']);
+
+    Route::resource('/app_banner', BannerController::class);
 
     Route::get('contact/{id}/delete', [ApiContactController::class, 'destroy']);
 });

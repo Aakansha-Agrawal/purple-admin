@@ -4,10 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Image;
 use App\Models\PickupAddress;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +30,7 @@ class ApiProductController extends Controller
             // nested relation table data
             foreach ($products as $product) {
                 $foo = [
-                    'product_images' => $product->product_images,                    
+                    'product_images' => $product->product_images,
                     'pickup_address' => $product->pickup_address,
                 ];
             }
@@ -66,22 +66,7 @@ class ApiProductController extends Controller
                 'name' => 'required',
                 'model' => 'required',
                 'brand' => 'required',
-                'shipping_cost' => 'required',
-                'more_info' => 'required',
-                'terms_conditions' => 'required',
-                'one_day_price' => 'required',
-                'two_day_price' => 'required',
-                'three_day_price' => 'required',
-                'weekly_price' => 'required',
-                'weekend_price' => 'required',
-                'package_1' => 'required',
-                'package_2' => 'required',
-                'package_1_price' => 'required',
-                'package_2_price' => 'required',
                 'inventory' => 'required',
-                'delivery' => 'required',
-                'category_id' => 'required',
-                'manual_pdf' => 'required',
                 'category_id' => 'required',
 
                 'address' => 'required',
@@ -292,6 +277,22 @@ class ApiProductController extends Controller
             return response()->json(['category' => $category, 'status' => 'true'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'category' => [], 'status' => 'false'], 500);
+        }
+    }
+
+    public function get_user_products(Request $request)
+    {
+        try {
+            $user = User::where('email', $request->email)->first();
+
+            $products = Product::where('service_provider_id', $user->id)->get();
+            if ($products->count() == 0) {
+                return response()->json(['message' => "No Products Found", 'status' => 'false'], 500);
+            }
+
+            return response()->json(['products' => $products, 'status' => 'true'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'user' => [], 'status' => 'false'], 500);
         }
     }
 }
