@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            AdminSeeder::class
+            AdminSeeder::class,
+            CategorySeeder::class
         ]);
 
         // Contact::factory(10)->create();
