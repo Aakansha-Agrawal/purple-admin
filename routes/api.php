@@ -41,7 +41,7 @@ Route::get('products', [ApiProductController::class, 'index']);
 Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
 Route::post('products/{id}', [ApiProductController::class, 'update']);
 Route::get('category/products', [ApiProductController::class, 'get_products']);
-Route::get('cat', [ApiProductController::class, 'category_products']);
+Route::get('category/{id}', [ApiProductController::class, 'category_products']);
 Route::post('user_products', [ApiProductController::class, 'get_user_products']);
 
 Route::get('bookings', [ApiBookingController::class, 'index']);

@@ -284,6 +284,26 @@ class ApiProductController extends Controller
     // fetch category products with cat id
     public function category_products($id)
     {
-        dd('hellllo');
+        try {
+            $category = Category::find($id);
+
+            if ($category) {
+                return response()->json(['message' => "No Records Found", 'category' => []], 500);
+            }
+
+            $foo = array();
+
+            // for merging category table into duty table and getting boat from duty table
+            // nested relation table data
+            foreach ($category as $cat) {
+                $foo = [
+                    'products' => $cat->product,
+                ];
+            }
+
+            return response()->json(['category' => $category, 'status' => 'true'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'category' => [], 'status' => 'false'], 500);
+        }
     }
 }
