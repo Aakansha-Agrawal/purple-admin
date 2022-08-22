@@ -64,17 +64,11 @@ class ApiProductController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
+                'images'=>'required',
                 'model' => 'required',
                 'brand' => 'required',
                 'inventory' => 'required',
                 'category_id' => 'required',
-
-                'address' => 'required',
-                'landmark' => 'required',
-                'country' => 'required',
-                'state' => 'required',
-                'city' => 'required',
-                'postal_code' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -133,21 +127,10 @@ class ApiProductController extends Controller
                 $image->save();
             }
 
-            return response()->json(['message' => 'Product Added Succesfully', 'product' => $product, 'address' => $address, 'status' => 'true']);
+            return response()->json(['message' => 'Product Added Succesfully', 'product' => $product, 'product_images' => $image, 'address' => $address, 'status' => 'true']);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'product' => [], 'status' => 'false']);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -215,15 +198,17 @@ class ApiProductController extends Controller
                 $address->product_id = $product->id;
                 $address->save();
 
-                foreach ($request->file('images') as $imagefile) {
-                    $image = new ProductImage();
-                    $path = $imagefile->store('/images/products', ['disk' =>   'my_files']);
-                    $image->url = $path;
-                    $image->product_id = $product->id;
-                    $image->update();
+                if($request->file('images')){
+                    foreach ($request->file('images') as $imagefile) {
+                        $image = new ProductImage();
+                        $path = $imagefile->store('/images/products', ['disk' => 'my_files']);
+                        $image->url = $path;
+                        $image->product_id = $product->id;
+                        $image->update();
+                    }
                 }
 
-                return response()->json(['message' => 'Product Updated Succesfully', 'product' => $product, 'address' => $address, 'status' => 'true']);
+                return response()->json(['message' => 'Product Updated Succesfully', 'product' => $product, 'product_images' => $image ?? '', 'address' => $address, 'status' => 'true']);
             } else {
                 return response()->json(['message' => 'Product Not Found', 'product' => [], 'status' => 'false']);
             }
@@ -294,5 +279,11 @@ class ApiProductController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'user' => [], 'status' => 'false'], 500);
         }
+    }
+    
+    // fetch category products with cat id
+    public function category_products($id)
+    {
+        dd('hellllo');
     }
 }

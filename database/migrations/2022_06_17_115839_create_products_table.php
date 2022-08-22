@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->longText('package_2')->nullable();
             $table->string('package_1_price')->nullable();
             $table->string('package_2_price')->nullable();
-            $table->string('inventory');
+            $table->string('inventory')->nullable();
             $table->string('delivery')->nullable();
             $table->string('shipping_cost')->nullable();
             $table->longText('more_info')->nullable();
