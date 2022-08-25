@@ -11,7 +11,6 @@ use App\Http\Controllers\API\ApiReviewController;
 use App\Http\Controllers\API\ApiSearchController;
 use App\Http\Controllers\API\ApiCartController;
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
