@@ -9,6 +9,7 @@ use App\Http\Controllers\API\ApiPaymentController;
 use App\Http\Controllers\API\ApiProductController;
 use App\Http\Controllers\API\ApiReviewController;
 use App\Http\Controllers\API\ApiSearchController;
+use App\Http\Controllers\API\ApiCartController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
@@ -60,7 +61,12 @@ Route::get('search/{name}', [ApiSearchController::class, 'filter']);
 
 Route::get('/banners', [BannerController::class, 'api_index']);
 
+Route::get('cart/{id}/delete', [ApiCartController::class, 'destroy']);
+
 Route::middleware('auth:sanctum', 'verified')->group(function () {
+    
+    Route::get('cart', [ApiCartController::class, 'index']);
+    Route::post('cart/store', [ApiCartController::class, 'store']);
 
     // storing using token for end user
     Route::post('bookings', [ApiBookingController::class, 'store']);

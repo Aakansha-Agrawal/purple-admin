@@ -16,6 +16,11 @@ class Product extends Model
     {
         return $this->belongsTo(Service::class, 'service_provider_id');
     }
+    
+    public function booking()
+    {
+        return $this->hasOne(Booking::class);
+    }
 
     public function category()
     {
@@ -30,5 +35,10 @@ class Product extends Model
     public function pickup_address()
     {
         return $this->hasOne(PickupAddress::class, 'product_id');
+    }
+    
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
     }
 }

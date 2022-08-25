@@ -287,7 +287,7 @@ class ApiProductController extends Controller
         try {
             $category = Category::find($id);
 
-            if ($category) {
+            if (!$category) {
                 return response()->json(['message' => "No Records Found", 'category' => []], 500);
             }
 
@@ -295,12 +295,17 @@ class ApiProductController extends Controller
 
             // for merging category table into duty table and getting boat from duty table
             // nested relation table data
-            foreach ($category as $cat) {
+            $foo = [
+                'products' => $category->product,
+            ];
+            
+            foreach($category->product as $product){
                 $foo = [
-                    'products' => $cat->product,
+                    'product_images' => $product->product_images,   
+                    'address' => $product->pickup_address,   
                 ];
             }
-
+            
             return response()->json(['category' => $category, 'status' => 'true'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'category' => [], 'status' => 'false'], 500);
