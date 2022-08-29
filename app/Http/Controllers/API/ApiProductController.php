@@ -255,8 +255,15 @@ class ApiProductController extends Controller
             // nested relation table data
             foreach ($category as $cat) {
                 $foo = [
-                    'products' => $cat->product,
+                    'products' => $cat->data,
                 ];
+            
+                foreach($cat->data as $product){
+                    $foo = [
+                        'product_images' => $product->product_images,   
+                        'address' => $product->pickup_address,   
+                    ];
+                }
             }
 
             return response()->json(['category' => $category, 'status' => 'true'], 200);
@@ -296,10 +303,10 @@ class ApiProductController extends Controller
             // for merging category table into duty table and getting boat from duty table
             // nested relation table data
             $foo = [
-                'products' => $category->product,
+                'products' => $category->data,
             ];
             
-            foreach($category->product as $product){
+            foreach($category->data as $product){
                 $foo = [
                     'product_images' => $product->product_images,   
                     'address' => $product->pickup_address,   

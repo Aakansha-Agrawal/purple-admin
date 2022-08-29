@@ -18,7 +18,7 @@ class ApiCartController extends Controller
     public function index()
     {
         try{
-            $cart = Cart::where('email', Auth::user()->email)->get();
+            $cart = Cart::where('user_email', Auth::user()->email)->get();
             $foo = [];
             
             foreach($cart as $data){
@@ -30,7 +30,7 @@ class ApiCartController extends Controller
             return response()->json(['message'=>"Product Fetched Successfully", 'status'=>'true', 'cart'=>$cart ]);
         }
         catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'true', 'cart'=>[] ]);
+            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
         }
     }
 
@@ -51,7 +51,7 @@ class ApiCartController extends Controller
             return response()->json(['message'=>"Product Added to Cart Successfully", 'status'=>'true', 'cart'=>$cart ]);
         }
         catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'true', 'cart'=>[] ]);
+            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
         }
     }
 
@@ -64,7 +64,7 @@ class ApiCartController extends Controller
             return response()->json(['message'=>"Product Deleted Successfully", 'status'=>'true', 'cart'=>$cart ]);
         }
         catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'true', 'cart'=>[] ]);
+            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
         }
         
     }
