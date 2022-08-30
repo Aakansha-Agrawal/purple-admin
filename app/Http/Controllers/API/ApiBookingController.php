@@ -62,21 +62,21 @@ class ApiBookingController extends Controller
         try {
             $booking = new Booking();
 
-            $validator = Validator::make($request->all(), [
-                'service_provider_id' => 'required',
-                'product_id' => 'required',
-                'package' => 'required',
-                'delivery_type' => 'required',
-                'purchase_date' => 'required',
-                'expiry_date' => 'required',
-                'total_price' => 'required',
-                'quantity' => 'required',
-            ]);
+            // $validator = Validator::make($request->all(), [
+            //     'service_provider_id' => 'required',
+            //     'product_id' => 'required',
+            //     'package' => 'required',
+            //     'delivery_type' => 'required',
+            //     'purchase_date' => 'required',
+            //     'expiry_date' => 'required',
+            //     'total_price' => 'required',
+            //     'quantity' => 'required',
+            // ]);
 
-            if ($validator->fails()) {
-                $error = $validator->errors()->all()[0];
-                return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
-            }
+            // if ($validator->fails()) {
+            //     $error = $validator->errors()->all()[0];
+            //     return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
+            // }
 
             $booking->renter_id = Auth::user()->id;
             $booking->service_provider_id = $request->input('service_provider_id');
@@ -112,19 +112,19 @@ class ApiBookingController extends Controller
             $payment->service_provider_status = 'pending';
             $payment->save();
 
-            $validator = Validator::make($request->all(), [
-                'address' => 'required',
-                'landmark' => 'nullable',
-                'country' => 'required',
-                'state' => 'required',
-                'city' => 'required',
-                'postal_code' => 'required',
-            ]);
+            // $validator = Validator::make($request->all(), [
+            //     'address' => 'required',
+            //     'landmark' => 'nullable',
+            //     'country' => 'required',
+            //     'state' => 'required',
+            //     'city' => 'required',
+            //     'postal_code' => 'required',
+            // ]);
 
-            if ($validator->fails()) {
-                $error = $validator->errors()->all()[0];
-                return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
-            }
+            // if ($validator->fails()) {
+            //     $error = $validator->errors()->all()[0];
+            //     return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
+            // }
 
             if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
                 // for saving address in address table
