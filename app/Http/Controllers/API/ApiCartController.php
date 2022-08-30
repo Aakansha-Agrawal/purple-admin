@@ -17,26 +17,25 @@ class ApiCartController extends Controller
      */
     public function index()
     {
-        try{
+        try {
             $cart = Cart::where('user_email', Auth::user()->email)->get();
             $foo = [];
-            
-            foreach($cart as $data){
+
+            foreach ($cart as $data) {
                 $foo = [
                     'product' => $data->product,
                 ];
             }
-            
-            return response()->json(['message'=>"Product Fetched Successfully", 'status'=>'true', 'cart'=>$cart ]);
-        }
-        catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
+
+            return response()->json(['message' => "Product Fetched Successfully", 'status' => 'true', 'cart' => $cart]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
         }
     }
 
     public function store(Request $request)
     {
-        try{
+        try {
             $cart = new Cart();
             $cart->user_email = Auth::user()->email;
             $cart->product_id = $request->input('product_id');
@@ -47,25 +46,25 @@ class ApiCartController extends Controller
             $cart->package_price = $request->input('package_price');
             $cart->delivery = $request->input('delivery');
             $cart->save();
-            
-            return response()->json(['message'=>"Product Added to Cart Successfully", 'status'=>'true', 'cart'=>$cart ]);
-        }
-        catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
+
+            return response()->json(['message' => "Product Added to Cart Successfully", 'status' => 'true', 'cart' => $cart]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
         }
     }
 
     public function destroy($id)
     {
-        try{
+        try {
             $cart = Cart::find($id);
-            $cart->destroy();
-            
-            return response()->json(['message'=>"Product Deleted Successfully", 'status'=>'true', 'cart'=>$cart ]);
+
+            if ($cart) {
+                $cart->destroy($id);
+                return response()->json(['message' => "Product Deleted Successfully", 'status' => 'true']);
+            } else
+                return response()->json(['message' => "Product Not Found!", 'status' => 'false', 'cart' => []]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
         }
-        catch(Exception $e){
-            return response()->json(['message'=>$e->getMessage(), 'status'=>'false', 'cart'=>[] ]);
-        }
-        
     }
 }

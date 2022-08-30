@@ -22,19 +22,23 @@ class ApiBookingController extends Controller
     {
         try {
             $bookings = Booking::all();
-            
+
             $foo = array();
-            
-            foreach($bookings as $book){
+
+            foreach ($bookings as $book) {
                 $foo = [
                     'products' => $book->service,
                     'products' => $book->renter,
                     'products' => $book->product,
-                    'products' => $book->product->product_images,
-                    'products' => $book->product->address
                 ];
+                foreach ($book->product as $data) {
+                    $foo = [
+                        'products' => $data->product_images,
+                        'products' => $data->address
+                    ];
+                }
             }
-            
+
             return response()->json(['bookings' => $bookings], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'bookings' => []], 500);
@@ -140,7 +144,7 @@ class ApiBookingController extends Controller
                 $address->save();
             }
 
-            return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking], 200);
+            return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking, 'address' => $address], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);
         }
