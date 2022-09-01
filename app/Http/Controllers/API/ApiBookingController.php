@@ -133,18 +133,21 @@ class ApiBookingController extends Controller
             if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
                 // for saving address in address table
                 // code for address on another table
-                $address = new PickupAddress();
-                $address->address = $request->input('address');
-                $address->landmark = $request->input('landmark');
-                $address->country = $request->input('country');
-                $address->state = $request->input('state');
-                $address->city = $request->input('city');
-                $address->postal_code = $request->input('postal_code');
-                $address->booking_id = $booking->id;
-                $address->save();
+                $pickup_address = new PickupAddress();
+                $pickup_address->address = $request->input('address');
+                $pickup_address->landmark = $request->input('landmark');
+                $pickup_address->country = $request->input('country');
+                $pickup_address->state = $request->input('state');
+                $pickup_address->city = $request->input('city');
+                $pickup_address->postal_code = $request->input('postal_code');
+                $pickup_address->booking_id = $booking->id;
+                $pickup_address->save();
+                
+                return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking, 'pickup_address' => $pickup_address], 200);
             }
-
-            return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking, 'address' => $address], 200);
+            
+            else
+                return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);
         }
