@@ -4,8 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\PickupAddress;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,16 +29,12 @@ class ApiBookingController extends Controller
 
             foreach ($bookings as $book) {
                 $foo = [
-                    'products' => $book->service,
-                    'products' => $book->renter,
+                    'service' => $book->product->service,
+                    'renter' => $book->renter,
                     'products' => $book->product,
+                    'products' => $book->product->address,
+                    'product_image' => $book->product->product_images,
                 ];
-                foreach ($book->product as $data) {
-                    $foo = [
-                        'products' => $data->product_images,
-                        'products' => $data->address
-                    ];
-                }
             }
 
             return response()->json(['bookings' => $bookings], 200);
@@ -64,90 +62,39 @@ class ApiBookingController extends Controller
     public function store(Request $request)
     {
         try {
-            $booking = new Booking();
+            foreach ($request->product_id as $id) {
+                $booking = new Booking();
 
-            // $validator = Validator::make($request->all(), [
-            //     'service_provider_id' => 'required',
-            //     'product_id' => 'required',
-            //     'package' => 'required',
-            //     'delivery_type' => 'required',
-            //     'purchase_date' => 'required',
-            //     'expiry_date' => 'required',
-            //     'total_price' => 'required',
-            //     'quantity' => 'required',
-            // ]);
+                $booking->renter_id = Auth::user()->id;
+                $booking->product_id = $id;
+                $booking->quantity = Cart::where('product_id', $id)->first()->quantity;
+                $booking->total_price = Cart::where('product_id', $id)->first()->total_amount;
+                $booking->status = 'active';
 
-            // if ($validator->fails()) {
-            //     $error = $validator->errors()->all()[0];
-            //     return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
-            // }
+                $booking->save();
 
-            $booking->renter_id = Auth::user()->id;
-            $booking->service_provider_id = $request->input('service_provider_id');
-            $booking->product_id = $request->input('product_id');
-            $booking->package = $request->input('package');
-            $booking->quantity = $request->input('quantity');
-            $booking->delivery_type = $request->input('delivery_type');
-            $booking->purchase_date = $request->input('purchase_date');
-            $booking->expiry_date = $request->input('expiry_date');
-            $booking->return_date = $request->input('return_date');
-            $booking->total_price = $request->input('total_price');
-            $booking->status = 'active';
+                // booking k sath payment store
+                $payment = new Payment();
+                $payment->booking_id = $booking->id;
+                $payment->renter_id = $booking->renter_id;
+                $payment->service_provider_id = Product::where('id', $booking->product_id)->first()->service_provider_id;
+                $payment->product_id = $booking->product_id;
+                $payment->total_amount = $booking->total_price;
 
-            $booking->save();
+                // to get 2% for admin
+                $price = ($payment->total_amount * 2) / 100;
+                $payment->admin_amount = $price;
 
-            // booking k sath payment store
-            $payment = new Payment();
-            $payment->booking_id = $booking->id;
-            $payment->renter_id = $booking->renter_id;
-            $payment->service_provider_id = $booking->service_provider_id;
-            $payment->product_id = $booking->product_id;
-            $payment->total_amount = $booking->total_price;
+                // remaining amount
+                $payment->service_provider_amount = $payment->total_amount - $payment->admin_amount;
 
-            // to get 2% for admin
-            $price = ($payment->total_amount * 2) / 100;
-            $payment->admin_amount = $price;
-
-            // remaining amount
-            $payment->service_provider_amount = $payment->total_amount - $payment->admin_amount;
-
-            $payment->payment_mode = 'online';
-            $payment->end_user_status = 'pending';
-            $payment->service_provider_status = 'pending';
-            $payment->save();
-
-            // $validator = Validator::make($request->all(), [
-            //     'address' => 'required',
-            //     'landmark' => 'nullable',
-            //     'country' => 'required',
-            //     'state' => 'required',
-            //     'city' => 'required',
-            //     'postal_code' => 'required',
-            // ]);
-
-            // if ($validator->fails()) {
-            //     $error = $validator->errors()->all()[0];
-            //     return response()->json(['status' => 'false', 'message' => $error, 'user' => []], 422);
-            // }
-
-            if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
-                // for saving address in address table
-                // code for address on another table
-                $pickup_address = new PickupAddress();
-                $pickup_address->address = $request->input('address');
-                $pickup_address->landmark = $request->input('landmark');
-                $pickup_address->country = $request->input('country');
-                $pickup_address->state = $request->input('state');
-                $pickup_address->city = $request->input('city');
-                $pickup_address->postal_code = $request->input('postal_code');
-                $pickup_address->booking_id = $booking->id;
-                $pickup_address->save();
-                
-                return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking, 'pickup_address' => $pickup_address], 200);
+                $payment->payment_mode = 'online';
+                $payment->end_user_status = 'pending';
+                $payment->service_provider_status = 'pending';
+                $payment->save();
             }
-            
-            else
-                return response()->json(['message' => 'Booking Added Succesfully', 'booking' => $booking], 200);
+
+            return response()->json(['message' => 'Booking Completed Succesfully', 'status' => 'true'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);
         }

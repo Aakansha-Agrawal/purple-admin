@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\PickupAddress;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,13 +42,31 @@ class ApiCartController extends Controller
             $cart->product_id = $request->input('product_id');
             $cart->quantity = $request->input('quantity');
             $cart->rent = $request->input('rent');
+            $cart->start_date = $request->input('start_date');
+            $cart->end_date = $request->input('end_date');
             $cart->rent_price = $request->input('rent_price');
             $cart->package = $request->input('package');
             $cart->package_price = $request->input('package_price');
+            $cart->total_amount = $request->input('total_amount');
             $cart->delivery = $request->input('delivery');
             $cart->save();
 
-            return response()->json(['message' => "Product Added to Cart Successfully", 'status' => 'true', 'cart' => $cart]);
+            if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
+                // for saving address in address table
+                // code for address on another table
+                $pickup_address = new PickupAddress();
+                $pickup_address->address = $request->input('address');
+                $pickup_address->landmark = $request->input('landmark');
+                $pickup_address->country = $request->input('country');
+                $pickup_address->state = $request->input('state');
+                $pickup_address->city = $request->input('city');
+                $pickup_address->postal_code = $request->input('postal_code');
+                $pickup_address->booking_id = $cart->id; 
+                $pickup_address->save();
+
+                return response()->json(['message' => "Product Added to Cart Successfully", 'status' => 'true', 'cart' => $cart, 'address' => $pickup_address]);
+            } else
+                return response()->json(['message' => "Product Added to Cart Successfully", 'status' => 'true', 'cart' => $cart]);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
         }

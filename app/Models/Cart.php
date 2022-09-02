@@ -18,6 +18,7 @@ class Cart extends Model
         'package',
         'package_price',
         'delivery',
+        'total_amount'
     ];
     
     public function product()

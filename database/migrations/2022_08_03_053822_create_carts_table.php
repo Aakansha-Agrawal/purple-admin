@@ -18,10 +18,13 @@ class CreateCartsTable extends Migration
             $table->string('user_email');
             $table->unsignedBigInteger('product_id');
             $table->bigInteger('quantity');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->string('rent');
             $table->string('rent_price');
             $table->string('package');
             $table->string('package_price');
+            $table->string('total_amount');
             $table->string('delivery');
             $table->timestamps();
         });
