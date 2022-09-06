@@ -51,7 +51,7 @@ class ApiCartController extends Controller
             $cart->delivery = $request->input('delivery');
             $cart->save();
 
-            if ($request->input('delivery_type') == "delivery" || $request->input('delivery_type') == "shipping") {
+            if ($request->input('delivery') == "delivery" || $request->input('delivery') == "shipping") {
                 // for saving address in address table
                 // code for address on another table
                 $pickup_address = new PickupAddress();
