@@ -65,6 +65,7 @@ Route::get('cart/{id}/delete', [ApiCartController::class, 'destroy']);
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     
     Route::get('cart', [ApiCartController::class, 'index']);
+    Route::get('cart/delete', [ApiCartController::class, 'destroy_data']);
     Route::post('cart/store', [ApiCartController::class, 'store']);
 
     // storing using token for end user

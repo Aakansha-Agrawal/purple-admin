@@ -61,7 +61,7 @@ class ApiCartController extends Controller
                 $pickup_address->state = $request->input('state');
                 $pickup_address->city = $request->input('city');
                 $pickup_address->postal_code = $request->input('postal_code');
-                $pickup_address->booking_id = $cart->id; 
+                $pickup_address->booking_id = $cart->id;
                 $pickup_address->save();
 
                 return response()->json(['message' => "Product Added to Cart Successfully", 'status' => 'true', 'cart' => $cart, 'address' => $pickup_address]);
@@ -82,6 +82,20 @@ class ApiCartController extends Controller
                 return response()->json(['message' => "Product Deleted Successfully", 'status' => 'true']);
             } else
                 return response()->json(['message' => "Product Not Found!", 'status' => 'false', 'cart' => []]);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
+        }
+    }
+
+    public function destroy_data()
+    {
+        try {
+            $cart = Cart::where('email', Auth::user()->email)->get();
+
+            foreach ($cart as $item) {
+                $item->destroy($item->id);
+            }
+            return response()->json(['message' => "Product Deleted Successfully", 'status' => 'true']);
         } catch (Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'status' => 'false', 'cart' => []]);
         }
