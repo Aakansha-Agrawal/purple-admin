@@ -14,7 +14,7 @@ class Product extends Model
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'service_provider_id');
+        return $this->belongsTo(User::class, 'service_provider_id');
     }
     
     public function booking()
