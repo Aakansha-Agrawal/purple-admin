@@ -72,6 +72,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('bookings', [ApiBookingController::class, 'store']);
 
     // storing using token for service provider id
+    Route::get('bookings/products', [ApiBookingController::class, 'show_booking']);
     Route::post('products', [ApiProductController::class, 'store']);
     Route::post('get_review', [ApiReviewController::class, 'get_review']);
 

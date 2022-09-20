@@ -67,6 +67,7 @@ class ApiBookingController extends Controller
 
                 $booking->renter_id = Auth::user()->id;
                 $booking->product_id = $id;
+                $booking->service_provider_id = Product::where('id', $id)->first()->service_provider_id;
                 $booking->quantity = Cart::where('product_id', $id)->first()->quantity;
                 $booking->total_price = Cart::where('product_id', $id)->first()->total_amount;
                 $booking->start_date = Cart::where('product_id', $id)->first()->start_date;
@@ -108,9 +109,27 @@ class ApiBookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show_booking()
     {
-        //
+        try {
+            $bookings = Booking::where('service_provider_id', Auth::user()->id);
+
+            $foo = array();
+
+            foreach ($bookings as $book) {
+                $foo = [
+                    'service' => $book->product->service,
+                    'renter' => $book->renter,
+                    'products' => $book->product,
+                    'products' => $book->product->address,
+                    'product_image' => $book->product->product_images,
+                ];
+            }
+
+            return response()->json(['bookings' => $bookings], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'bookings' => []], 500);
+        }
     }
 
     /**

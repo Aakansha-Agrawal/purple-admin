@@ -16,6 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('renter_id');
+            $table->string('service_provider_id');
             $table->integer('product_id');
             $table->string('quantity')->nullable();
             $table->string('total_price');
