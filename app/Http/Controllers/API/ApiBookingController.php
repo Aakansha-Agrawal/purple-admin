@@ -69,6 +69,8 @@ class ApiBookingController extends Controller
                 $booking->product_id = $id;
                 $booking->quantity = Cart::where('product_id', $id)->first()->quantity;
                 $booking->total_price = Cart::where('product_id', $id)->first()->total_amount;
+                $booking->start_date = Cart::where('product_id', $id)->first()->start_date;
+                $booking->end_date = Cart::where('product_id', $id)->first()->end_date;
                 $booking->status = 'active';
 
                 $booking->save();

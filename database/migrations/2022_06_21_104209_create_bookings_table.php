@@ -19,6 +19,8 @@ class CreateBookingsTable extends Migration
             $table->integer('product_id');
             $table->string('quantity')->nullable();
             $table->string('total_price');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->enum('status', ['active' => 'Active', 'closed' => 'Closed']);
             $table->softDeletes();
             $table->timestamps();
