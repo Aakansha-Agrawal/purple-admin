@@ -61,6 +61,7 @@ class ApiBookingController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         try {
             foreach ($request->product_id as $id) {
                 $booking = new Booking();
@@ -100,21 +101,6 @@ class ApiBookingController extends Controller
             return response()->json(['message' => 'Booking Completed Succesfully', 'status' => 'true'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'booking' => []], 500);
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show_booking(Request $request)
-    {
-        try {
-            dd($request->all());
-        } catch (Exception $e) {
-            dd('error');
         }
     }
 
@@ -161,13 +147,28 @@ class ApiBookingController extends Controller
     }
 
 
-    public function booking()
+    public function showBooking(Request $request)
     {
-        try {
-            $rrr = 'jkkh';
-            return response()->json(['message' => 'Status Updated Successfully !', 'status' => 'true', 'booking' => $rrr]);
-        } catch (Exception $e) {
-            dd('error');
+        $status = ucfirst($request->status);
+
+        if ($request->service_provider_id)
+            $bookings = Booking::where('service_provider_id', $request->service_provider_id)->where('status', $status)->get();
+        else
+            $bookings = Booking::where('renter_id', $request->renter_id)->where('status', $status)->get();
+
+
+        $foo = array();
+
+        foreach ($bookings as $book) {
+            $foo = [
+                'service' => $book->service,
+                'renter' => $book->renter,
+                'products' => $book->product,
+                'products' => $book->product->address,
+                'product_image' => $book->product->product_images,
+            ];
         }
+
+        return response()->json(['bookings' => $bookings], 200);
     }
 }

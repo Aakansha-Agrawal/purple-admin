@@ -61,7 +61,7 @@ Route::get('search/{name}', [ApiSearchController::class, 'filter']);
 Route::get('/banners', [BannerController::class, 'api_index']);
 
 Route::get('cart/{id}/delete', [ApiCartController::class, 'destroy']);
-Route::post('/bookings/products', [ApiBookingController::class, 'booking']);
+Route::post('/status/bookings', [ApiBookingController::class, 'showBooking']);
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     
