@@ -152,9 +152,9 @@ class ApiBookingController extends Controller
         $status = ucfirst($request->status);
 
         if ($request->service_provider_id)
-            $bookings = Booking::where('service_provider_id', $request->service_provider_id)->where('status', $status)->get();
+            $bookings = Booking::where('service_provider_id', Auth::user()->id)->where('status', $status)->get();
         else
-            $bookings = Booking::where('renter_id', $request->renter_id)->where('status', $status)->get();
+            $bookings = Booking::where('renter_id', Auth::user()->id)->where('status', $status)->get();
 
 
         $foo = array();

@@ -61,7 +61,6 @@ Route::get('search/{name}', [ApiSearchController::class, 'filter']);
 Route::get('/banners', [BannerController::class, 'api_index']);
 
 Route::get('cart/{id}/delete', [ApiCartController::class, 'destroy']);
-Route::post('/status/bookings', [ApiBookingController::class, 'showBooking']);
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     
@@ -75,6 +74,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     // storing using token for service provider id
     Route::post('products', [ApiProductController::class, 'store']);
     Route::post('get_review', [ApiReviewController::class, 'get_review']);
+    Route::post('/status/bookings', [ApiBookingController::class, 'showBooking']);
 
     // storing using token for renter id
     Route::post('review', [ApiReviewController::class, 'store']);
