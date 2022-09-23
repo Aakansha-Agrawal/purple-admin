@@ -29,10 +29,10 @@ class ApiBookingController extends Controller
 
             foreach ($bookings as $book) {
                 $foo = [
-                    'service' => $book->product->service,
+                    'service' => $book->service,
                     'renter' => $book->renter,
                     'products' => $book->product,
-                    'products' => $book->product->address,
+                    'products' => $book->product->pickup_address,
                     'product_image' => $book->product->product_images,
                 ];
             }
@@ -109,26 +109,12 @@ class ApiBookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show_booking()
+    public function show_booking(Request $request)
     {
         try {
-            $bookings = Booking::where('service_provider_id', Auth::user()->id);
-
-            $foo = array();
-
-            foreach ($bookings as $book) {
-                $foo = [
-                    'service' => $book->product->service,
-                    'renter' => $book->renter,
-                    'products' => $book->product,
-                    'products' => $book->product->address,
-                    'product_image' => $book->product->product_images,
-                ];
-            }
-
-            return response()->json(['bookings' => $bookings], 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'bookings' => []], 500);
+            dd($request->all());
+        } catch (Exception $e) {
+            dd('error');
         }
     }
 
@@ -172,5 +158,16 @@ class ApiBookingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function booking()
+    {
+        try {
+            $rrr = 'jkkh';
+            return response()->json(['message' => 'Status Updated Successfully !', 'status' => 'true', 'booking' => $rrr]);
+        } catch (Exception $e) {
+            dd('error');
+        }
     }
 }
