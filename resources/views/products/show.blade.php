@@ -43,12 +43,8 @@
                         <div class="d-flex mt-3">
                             <div class="mr-4">
                                 <h5>One Day Price - {{ $product->one_day_price }}</h5>
-                                <h5>Two Days Price - {{ $product->two_day_price }}</h5>
-                                <h5>Three Days Price - {{ $product->three_day_price }}</h5>
                             </div>
                             <div class="ml-4">
-                                <h5>Weekly Price - {{ $product->weekly_price }}</h5>
-                                <h5>Weekend Price - {{ $product->weekend_price }}</h5>
                                 <h5>Shipping Cost - {{ $product->shipping_cost }}</h5>
                             </div>
                         </div>
@@ -60,27 +56,6 @@
                                 <h5><i class="fa fa-download mr-1" aria-hidden="true"></i>Download</h5>
                             </b>
                         </a>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Package</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>{{ $product->package_1 }}</td>
-                                    <td>{{ $product->package_1_price }}</td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>{{ $product->package_2 }}</td>
-                                    <td>{{ $product->package_2_price }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'service_provider_id', 'one_day_price', 'two_day_price', 'three_day_price', 'weekly_price', 'package_1', 'package_2', 'package_1_price', 'package_2_price', 'inventory', 'delivery', 'shipping_cost', 'more_info', 'terms_conditions', 'category_id'];
+    protected $fillable = ['name', 'service_provider_id', 'one_day_price', 'inventory', 'delivery', 'shipping_cost', 'more_info', 'terms_conditions', 'category_id'];
 
     public function service()
     {

@@ -45,8 +45,6 @@ class ApiCartController extends Controller
             $cart->start_date = $request->input('start_date');
             $cart->end_date = $request->input('end_date');
             $cart->rent_price = $request->input('rent_price');
-            $cart->package = $request->input('package');
-            $cart->package_price = $request->input('package_price');
             $cart->total_amount = $request->input('total_amount');
             $cart->delivery = $request->input('delivery');
             $cart->save();

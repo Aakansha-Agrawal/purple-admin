@@ -22,8 +22,6 @@ class CreateCartsTable extends Migration
             $table->string('end_date');
             $table->string('rent');
             $table->string('rent_price');
-            $table->string('package');
-            $table->string('package_price');
             $table->string('total_amount');
             $table->string('delivery');
             $table->timestamps();

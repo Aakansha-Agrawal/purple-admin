@@ -15,8 +15,6 @@ class Cart extends Model
         'quantity',
         'rent',
         'rent_price',
-        'package',
-        'package_price',
         'delivery',
         'total_amount'
     ];
