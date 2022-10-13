@@ -61,7 +61,6 @@ class ApiBookingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         try {
             foreach ($request->product_id as $id) {
                 $booking = new Booking();
@@ -151,11 +150,13 @@ class ApiBookingController extends Controller
     {
         $status = ucfirst($request->status);
 
-        if ($request->service_provider_id)
-            $bookings = Booking::where('service_provider_id', Auth::user()->id)->where('status', $status)->get();
+        $bookings_service = Booking::where('service_provider_id', Auth::user()->id)->where('status', $status)->get();
+        $bookings_renter = Booking::where('renter_id', Auth::user()->id)->where('status', $status)->get();
+        
+        if($bookings_service)
+            $bookings = $bookings_service;
         else
-            $bookings = Booking::where('renter_id', Auth::user()->id)->where('status', $status)->get();
-
+            $bookings = $bookings_renter;
 
         $foo = array();
 
