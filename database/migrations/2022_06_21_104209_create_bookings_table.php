@@ -22,7 +22,7 @@ class CreateBookingsTable extends Migration
             $table->string('total_price');
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
-            $table->string('return_date')->nullable();
+            $table->dateTime('return_date')->nullable();
             $table->enum('status', ['active' => 'Active', 'closed' => 'Closed']);
             $table->softDeletes();
             $table->timestamps();

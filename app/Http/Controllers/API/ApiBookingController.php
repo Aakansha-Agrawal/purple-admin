@@ -153,7 +153,7 @@ class ApiBookingController extends Controller
         $bookings_service = Booking::where('service_provider_id', Auth::user()->id)->where('status', $status)->get();
         $bookings_renter = Booking::where('renter_id', Auth::user()->id)->where('status', $status)->get();
         
-        if($bookings_service)
+        if($bookings_service->count() > 0)
             $bookings = $bookings_service;
         else
             $bookings = $bookings_renter;
