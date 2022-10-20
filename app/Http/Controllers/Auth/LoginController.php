@@ -50,8 +50,11 @@ class LoginController extends Controller
                 return redirect()->back();
             } else{
                 // dd('user');
-                return redirect('/')->with("error", "You don't have access login");
+                return redirect()->back()->with("error", "You don't have access login");
             }
+        }
+        else{
+            return redirect()->back()->with("error", "Please Check you Email or Password");
         }
     }
 }

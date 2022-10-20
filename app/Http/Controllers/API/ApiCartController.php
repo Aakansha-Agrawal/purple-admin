@@ -25,6 +25,7 @@ class ApiCartController extends Controller
             foreach ($cart as $data) {
                 $foo = [
                     'product' => $data->product,
+                    'product_images' => $data->product->product_images,
                 ];
             }
 
