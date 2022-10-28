@@ -42,7 +42,6 @@ Route::get('products/{id}/delete', [ApiProductController::class, 'destroy']);
 Route::post('products/{id}', [ApiProductController::class, 'update']);
 Route::get('category/products', [ApiProductController::class, 'get_products']);
 Route::get('category/{id}', [ApiProductController::class, 'category_products']);
-Route::post('user_products', [ApiProductController::class, 'get_user_products']);
 
 Route::get('bookings', [ApiBookingController::class, 'index']);
 Route::post('bookings/{id}', [ApiBookingController::class, 'update']);
@@ -75,6 +74,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('products', [ApiProductController::class, 'store']);
     Route::post('get_review', [ApiReviewController::class, 'get_review']);
     Route::post('/status/bookings', [ApiBookingController::class, 'showBooking']);
+    Route::get('user_products', [ApiProductController::class, 'get_user_products']);
 
     // storing using token for renter id
     Route::post('review', [ApiReviewController::class, 'store']);

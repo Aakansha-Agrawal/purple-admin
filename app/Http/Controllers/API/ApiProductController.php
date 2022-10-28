@@ -256,14 +256,23 @@ class ApiProductController extends Controller
         }
     }
 
-    public function get_user_products(Request $request)
+    public function get_user_products()
     {
         try {
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('email', auth()->user()->email)->first();
 
             $products = Product::where('service_provider_id', $user->id)->get();
             if ($products->count() == 0) {
                 return response()->json(['message' => "No Products Found", 'status' => 'false'], 500);
+            }
+            
+            $foo = array();
+            
+            foreach($products as $product){
+                $foo = [
+                    'product_images' => $product->product_images,
+                    'pickup_address' => $product->pickup_address,
+                ];
             }
 
             return response()->json(['products' => $products, 'status' => 'true'], 200);
